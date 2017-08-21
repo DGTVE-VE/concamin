@@ -3,21 +3,23 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Auth_userprofile extends Model
 {
     use Notifiable;
-
-    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+    protected $table = 'edxapp.auth_userprofile';
+
+    public $timestamps = false;
+
     protected $fillable = [
-        'username', 'email', 'password', 'user_id', 'is_student', 'country', 'state', 'mode', 'level', 'id_plantel', 'id_profesion',
+        'user_id', 'name', 'location', 'gender', 'mailing_address', 'year_of_birth', 'level_of_education', 'country', 'city',
     ];
 
     /**
@@ -26,6 +28,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
 }

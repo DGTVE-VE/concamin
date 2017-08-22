@@ -58,8 +58,6 @@ class RegisterController extends Controller
             'gender' => 'required',
             'country' => 'required|string',
             'cp' => 'required|integer|min:1000|max:99999',
-            'state' => 'required|string',
-            'municipality' => 'string',
             'is_student' => 'required|integer|min:0|max:1',
             'mode' => 'string',
             'grade' => 'integer|min:1|max:15',
@@ -80,8 +78,6 @@ class RegisterController extends Controller
             'gender' => 'required',
             'country' => 'required|string',
             'cp' => 'required|integer|min:1000|max:99999',
-            'state' => 'required|string',
-            'municipality' => 'string',
             'is_student' => 'required|integer|min:0|max:1',
             'grade' => 'integer|min:1|max:15',
             'degree' => 'string',
@@ -106,7 +102,7 @@ class RegisterController extends Controller
       if(empty(Auth_user::whereemail($data['email'])->first())){
 
           if(empty(Auth_user::whereusername($data['username'])->first())){
-            print_r(base64_encode($psw));
+
             $auth_user = new Auth_user;
             $auth_user->username = $data['username'];
             $auth_user->first_name = '';
@@ -119,7 +115,6 @@ class RegisterController extends Controller
             $auth_user->last_login = date("Y-m-d H:i:s");
             $auth_user->date_joined = date("Y-m-d H:i:s");
             $auth_user->save();
-            print_r("Error1");
 
             $auth_userprofile = new Auth_userprofile;
             $auth_userprofile->user_id = $auth_user->id;
@@ -135,30 +130,24 @@ class RegisterController extends Controller
             $auth_userprofile->goals = '';
             $auth_userprofile->allow_certificate = '1';
             $auth_userprofile->country = $data['country'];
-            $auth_userprofile->city = $data['state'];
+            $auth_userprofile->city = '';
             $auth_userprofile->save();
-            print_r("Error2");
-
 
             return User::create([
                 'username' => $data['username'],
                 'user_id' => $auth_user->id,
                 'is_student' => $data['is_student'],
                 'email' => $data['email'],
-                'password' => 'pbkdf2_sha256$'.$itera.'$'.$salt.'$'.base64_encode($psw),
+                'password' => bcrypt($data['password']),
                 'id_profesion' => '10',
             ]);
           }
           else {
-            print_r("Username ya utilizado");
+            \Session::flash('message', 'Activación con exito!');
           }
-
-
       }
       else{
-        print_r("Correo ya utilizado");
+        \Session::flash('message', 'Activación con exito!');
       }
-
-
     }
 }

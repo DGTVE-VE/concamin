@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
-class Auth_userprofile extends Model
+class Escuelas extends Model
 {
     use Notifiable;
 
@@ -14,12 +14,11 @@ class Auth_userprofile extends Model
      *
      * @var array
      */
-    protected $table = 'edxapp.auth_userprofile';
+    protected $table = 'escuelas';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'user_id', 'name', 'location', 'gender', 'mailing_address', 'year_of_birth', 'level_of_education', 'country', 'city',
+        'tipo_educativo', 'entidad', 'municipio', 'clave', 'centro_educativo', 'control',
     ];
-
 }

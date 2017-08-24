@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+            <div id="parent" class="panel panel-default">
                 <div class="panel-heading">Registrarse</div>
 
                 @if (Session::has('message'))
@@ -125,7 +125,7 @@
 
                             <div class="col-md-6">
 
-                              <select id="country" class="form-control" name="country" value="{{old('country')}}" required autofocus>
+                              <select id="country" class="form-control" name="country" value="{{old('country')}}" onchange="hide()" required autofocus>
                                 <option value="AF">Afganistán</option>
                                 <option value="AL">Albania</option>
                                 <option value="DE">Alemania</option>
@@ -374,7 +374,7 @@
                             <label for="cp" class="col-md-4 control-label">Código Postal</label>
 
                             <div class="col-md-6">
-                                <input id="cp" type="number" min="1000" max="99999" class="form-control" name="cp" value="{{ old('cp') }}" required autofocus>
+                                <input id="cp" type="number" min="1000" max="99999" class="form-control" name="cp" value="{{ old('cp') }}" onchange="validarcp()" required autofocus>
 
                                 @if ($errors->has('cp'))
                                     <span class="help-block">
@@ -384,13 +384,37 @@
                             </div>
                         </div>
 
+                        <div id="state" style="display: none" class="form-group cp">
+                            <label for="cp" class="col-md-4 control-label">Estado</label>
+
+                            <div class="col-md-6">
+                                <input id="viewcp1" type="text" class="form-control" name="viewcp1" disabled>
+                            </div>
+                        </div>
+
+                        <div id="municipality" style="display: none" class="form-group cp">
+                            <label for="viewcp2" class="col-md-4 control-label">Municipio / Delegación</label>
+
+                            <div class="col-md-6">
+                                <input id="viewcp2" type="text" class="form-control" name="viewcp2" disabled>
+                            </div>
+                        </div>
+
+                        <div id="colony" style="display: none" class="form-group cp">
+                            <label for="viewcp3" class="col-md-4 control-label">Colonia</label>
+
+                            <div class="col-md-6">
+                                <input id="viewcp3" type="text" class="form-control" name="viewcp3" disabled>
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('is_student') ? ' has-error' : '' }}">
                             <label for="is_student" class="col-md-4 control-label">¿Eres estudiante?</label>
 
                             <div class="col-md-6">
 
-                                    <input id="is_student" type="radio" name="is_student" value="1" required autofocus> Si<br>
-                                    <input id="is_student" type="radio" name="is_student" value="0" required autofocus> No<br>
+                                    <input id="is_student" type="radio" name="is_student" value="1" required autofocus onclick="student()"> Si<br>
+                                    <input id="is_student" type="radio" name="is_student" value="0" required autofocus onclick="isnt_student()"> No<br>
 
                                 @if ($errors->has('is_student'))
                                     <span class="help-block">
@@ -400,8 +424,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('mode') ? ' has-error' : '' }}">
-                            <label for="mode" class="col-md-4 control-label">¿Elige la modalidad en la que cursas tus estudios?</label>
+                        <div id="modeDiv" style="display: none" class="form-group{{ $errors->has('mode') ? ' has-error' : '' }}">
+                            <label for="mode" class="col-md-4 control-label">¿En qué modalidad cursas tus estudios?</label>
 
                             <div class="col-md-6">
 
@@ -418,7 +442,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('grade') ? ' has-error' : '' }}">
+                        <div id="gradeDiv" style="display: none" class="form-group{{ $errors->has('grade') ? ' has-error' : '' }}">
                             <label for="grade" class="col-md-4 control-label">¿Qué nivel cursas actualmente?</label>
 
                               <div class="col-md-6">
@@ -433,7 +457,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('level_of_education') ? ' has-error' : '' }}">
-                            <label for="level_of_education" class="col-md-4 control-label">Máximo nivel educativo en curso o completado</label>
+                            <label for="level_of_education" class="col-md-4 control-label">¿Cuál es tu nivel educativo?</label>
 
                             <div class="col-md-6">
                               <select class="form-control" name="level_of_education" id="level_of_education">
@@ -461,8 +485,8 @@
                             <label for="country_study" class="col-md-4 control-label">Estudias en México</label>
 
                             <div class="col-md-6">
-                                <input id="country_study" type="radio" name="country_study" value="1" required autofocus> Si<br>
-                                <input id="country_study" type="radio" name="country_study" value="0" required autofocus> No<br>
+                                <input id="country_study" type="radio" name="country_study" value="1" required autofocus onclick="is_mexican()"> Si<br>
+                                <input id="country_study" type="radio" name="country_study" value="0" required autofocus onclick="isnt_mexican()"> No<br>
 
                                 @if ($errors->has('country_study'))
                                     <span class="help-block">
@@ -472,7 +496,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('state_study') ? ' has-error' : '' }}">
+                        <div id="state_studyDiv" style="display: none" class="form-group{{ $errors->has('state_study') ? ' has-error' : '' }}">
                             <label for="state_study" class="col-md-4 control-label">Estado donde estudias</label>
 
                             <div class="col-md-6">
@@ -486,7 +510,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('municipality_study') ? ' has-error' : '' }}">
+                        <div id="municipality_studyDiv" style="display: none" class="form-group{{ $errors->has('municipality_study') ? ' has-error' : '' }}">
                             <label for="municipality_study" class="col-md-4 control-label">Municipio donde estudias</label>
 
                             <div class="col-md-6">
@@ -500,7 +524,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('plantelEducativo') ? ' has-error' : '' }}">
+                        <div id="plantelEducativoDiv" style="display: none" class="form-group{{ $errors->has('plantelEducativo') ? ' has-error' : '' }}">
                             <label for="plantelEducativo" class="col-md-4 control-label">Plantel Educativo</label>
 
                             <div class="col-md-6">
@@ -514,7 +538,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('degree') ? ' has-error' : '' }}">
+                        <div id="degreeDiv" style="display: none" class="form-group{{ $errors->has('degree') ? ' has-error' : '' }}">
                             <label for="degree" class="col-md-4 control-label">Carrera</label>
 
                             <div class="col-md-6">
@@ -541,4 +565,89 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+
+  function student(){
+    document.getElementById('modeDiv').style.display = 'inline';
+    document.getElementById('gradeDiv').style.display = 'inline';
+  }
+
+  function isnt_student(){
+    document.getElementById('modeDiv').style.display = 'none';
+    document.getElementById('gradeDiv').style.display = 'none';
+  }
+
+  function is_mexican(){
+    document.getElementById('state_studyDiv').style.display = 'inline';
+    document.getElementById('municipality_studyDiv').style.display = 'inline';
+    document.getElementById('plantelEducativoDiv').style.display = 'inline';
+    document.getElementById('degreeDiv').style.display = 'inline';
+  }
+
+  function isnt_mexican(){
+    document.getElementById('state_studyDiv').style.display = 'none';
+    document.getElementById('municipality_studyDiv').style.display = 'none';
+    document.getElementById('plantelEducativoDiv').style.display = 'none';
+    document.getElementById('degreeDiv').style.display = 'none';
+  }
+
+  function hide(){
+    if(document.getElementById('country').value == "MX"){
+      document.getElementById('state').style.display = 'inline';
+      document.getElementById('municipality').style.display = 'inline';
+      document.getElementById('colony').style.display = 'inline';
+    }else {
+      document.getElementById('state').style.display = 'none';
+      document.getElementById('municipality').style.display = 'none';
+      document.getElementById('colony').style.display = 'none';
+    }
+
+  }
+
+  function validarcp() {
+    var cp = document.getElementById("cp").value;
+    console.log(cp);
+    var country = document.getElementById("country").value;
+
+    var request = $.ajax({
+      url: "http://reportes.mexicox.gob.mx/validarcp",
+      method: "POST",
+      data: {codigopostal : cp },
+      dataType: "jsonp",
+      async : false,
+      success: function(data){
+        // success logic
+        console.log ('success verify cp');
+      }
+    });
+
+    request.done(function( ms ) {
+
+      if (country == "MX") {
+        if ( JSON.stringify(ms[0].Estado) != "undefined" ) {
+          document.getElementById('state').style.display = 'inline';
+          document.getElementById('municipality').style.display = 'inline';
+          document.getElementById('colony').style.display = 'inline';
+          document.getElementById("viewcp1").value = JSON.stringify(ms[0].Estado);
+          document.getElementById("viewcp2").value = JSON.stringify(ms[0].Municipio);
+          document.getElementById("viewcp3").value = JSON.stringify(ms[0].Colonia);
+        }else {
+          document.getElementById("viewcp1").value = "Código postal no encontrado";
+          document.getElementById("viewcp2").value = ms[0].Estado;
+          document.getElementById("viewcp3").value = "";
+        }
+
+      }
+
+    });
+
+    request.fail(function(ms) {
+      document.getElementById("viewcp1").value = "Código postal no encontrado";
+      document.getElementById("viewcp2").value = "";
+      document.getElementById("viewcp3").value = "";
+    });
+  }
+
+</script>
 @endsection

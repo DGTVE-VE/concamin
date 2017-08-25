@@ -4,9 +4,9 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div id="parent" class="panel panel-default">
-                <div class="panel-heading">Registrarse</div>
+                <div class="panel-heading text-center">Registro</div>
 
                 @if (Session::has('message'))
                 	<div class="alert alert-info">{{ Session::get('message') }}</div>
@@ -25,10 +25,10 @@
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Nombre completo</label>
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="name" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Nombre completo</label>
 
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
@@ -39,60 +39,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Nombre de usuario</label>
+                        <div class="form-group{{ $errors->has('dateOfBirth') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="dateOfBirth" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Fecha de Nacimineto</label>
 
-                            <div class="col-md-6">
-                                <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
-
-                                @if ($errors->has('username'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">Correo</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Contraseña</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirma tu contraseña</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('dateOfBirth') ? ' has-error' : '' }}">
-                            <label for="dateOfBirth" class="col-md-4 control-label">Fecha de Nacimineto</label>
-
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <input id="dateOfBirth" type="date" class="form-control" name="dateOfBirth" value="{{ old('dateOfBirth') }}" required autofocus>
 
                                 @if ($errors->has('dateOfBirth'))
@@ -103,15 +53,69 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                            <label for="gender" class="col-md-4 control-label">Género</label>
+                        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="name" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Nombre de usuario</label>
 
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
 
-                                    <input id="gender" type="radio" name="gender" value="f" required autofocus> Mujer<br>
-                                    <input id="gender" type="radio" name="gender" value="m" required autofocus> Hombre<br>
-                                    <input id="gender" type="radio" name="gender" value="o" required autofocus> Otro<br>
+                                @if ($errors->has('username'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="email" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Correo</label>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="visible-sm col-sm-12"></div>
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="password" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Contraseña</label>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                <input id="password" type="password" class="form-control" name="password" required>
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="password-confirm" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Confirma tu contraseña</label>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }} col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label for="gender" class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">Género</label>
+
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                    <input class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="gender" type="radio" name="gender" value="f" required autofocus> Mujer
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                    <input class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="gender" type="radio" name="gender" value="m" required autofocus> Hombre
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                    <input class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="gender" type="radio" name="gender" value="o" required autofocus> Otro
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 @if ($errors->has('gender'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('gender') }}</strong>
@@ -120,10 +124,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
-                            <label for="country" class="col-md-4 control-label">País dónde vives</label>
+                        <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="country" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">País dónde vives</label>
 
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
 
                               <select id="country" class="form-control" name="country" value="{{old('country')}}" onchange="hide()" required autofocus>
                                 <option value="AF">Afganistán</option>
@@ -370,10 +374,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('cp') ? ' has-error' : '' }}">
-                            <label for="cp" class="col-md-4 control-label">Código Postal</label>
+                        <div class="form-group{{ $errors->has('cp') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="cp" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Código Postal</label>
 
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <input id="cp" type="number" min="1000" max="99999" class="form-control" name="cp" value="{{ old('cp') }}" onchange="validarcp()" required autofocus>
 
                                 @if ($errors->has('cp'))
@@ -384,82 +388,34 @@
                             </div>
                         </div>
 
-                        <div id="state" style="display: none" class="form-group cp">
+                        <div id="state" style="display: none" class="form-group cp col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                             <label for="cp" class="col-md-4 control-label">Estado</label>
 
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <input id="viewcp1" type="text" class="form-control" name="viewcp1" disabled>
                             </div>
                         </div>
 
-                        <div id="municipality" style="display: none" class="form-group cp">
-                            <label for="viewcp2" class="col-md-4 control-label">Municipio / Delegación</label>
+                        <div id="municipality" style="display: none" class="form-group cp col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                            <label for="viewcp2" class="col-lg-6 col-md-6 col-sm-6 col-xs-12control-label">Municipio / Delegación</label>
 
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <input id="viewcp2" type="text" class="form-control" name="viewcp2" disabled>
                             </div>
                         </div>
 
-                        <div id="colony" style="display: none" class="form-group cp">
-                            <label for="viewcp3" class="col-md-4 control-label">Colonia</label>
+                        <div id="colony" style="display: none" class="form-group cp col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="viewcp3" class="col-lg-6 col-md-6 col-sm-6 col-xs-12control-label">Colonia</label>
 
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <input id="viewcp3" type="text" class="form-control" name="viewcp3" disabled>
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('is_student') ? ' has-error' : '' }}">
-                            <label for="is_student" class="col-md-4 control-label">¿Eres estudiante?</label>
+                        <div class="form-group{{ $errors->has('level_of_education') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="level_of_education" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿Cuál es tu nivel educativo?</label>
 
-                            <div class="col-md-6">
-
-                                    <input id="is_student" type="radio" name="is_student" value="1" required autofocus onclick="student()"> Si<br>
-                                    <input id="is_student" type="radio" name="is_student" value="0" required autofocus onclick="isnt_student()"> No<br>
-
-                                @if ($errors->has('is_student'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('is_student') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div id="modeDiv" style="display: none" class="form-group{{ $errors->has('mode') ? ' has-error' : '' }}">
-                            <label for="mode" class="col-md-4 control-label">¿En qué modalidad cursas tus estudios?</label>
-
-                            <div class="col-md-6">
-
-                                <input id="mode" type="radio" name="mode" value="anual" required autofocus> Anual<br>
-                                <input id="mode" type="radio" name="mode" value="semestral" required autofocus> Semestral<br>
-                                <input id="mode" type="radio" name="mode" value="cuatrimestral" required autofocus> Cuatrimestral<br>
-                                <input id="mode" type="radio" name="mode" value="trimestral" required autofocus> Trimestral<br>
-
-                                @if ($errors->has('mode'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('mode') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div id="gradeDiv" style="display: none" class="form-group{{ $errors->has('grade') ? ' has-error' : '' }}">
-                            <label for="grade" class="col-md-4 control-label">¿Qué nivel cursas actualmente?</label>
-
-                              <div class="col-md-6">
-                                <input id="grade" type="number" min="1" max="15" class="form-control" name="grade" value="{{ old('grade') }}" required autofocus>
-
-                                @if ($errors->has('grade'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('grade') }}</strong>
-                                    </span>
-                                @endif
-                              </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('level_of_education') ? ' has-error' : '' }}">
-                            <label for="level_of_education" class="col-md-4 control-label">¿Cuál es tu nivel educativo?</label>
-
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                               <select class="form-control" name="level_of_education" id="level_of_education">
                                 <option value="" selected> -</option>
                                 <option value="el"> Primaria</option>
@@ -481,10 +437,59 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('country_study') ? ' has-error' : '' }}">
-                            <label for="country_study" class="col-md-4 control-label">Estudias en México</label>
+                        <div class="form-group{{ $errors->has('is_student') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="is_student" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿Eres estudiante?</label>
 
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+                                    <input id="is_student" type="radio" name="is_student" value="1" required autofocus onclick="student()"> Si<br>
+                                    <input id="is_student" type="radio" name="is_student" value="0" required autofocus onclick="isnt_student()"> No<br>
+
+                                @if ($errors->has('is_student'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('is_student') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div id="modeDiv" style="display: none" class="form-group{{ $errors->has('mode') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <label for="mode" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿En qué modalidad cursas tus estudios?</label>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+                                    <input id="mode" type="radio" name="mode" value="anual" required autofocus> Anual<br>
+                                    <input id="mode" type="radio" name="mode" value="semestral" required autofocus> Semestral<br>
+                                    <input id="mode" type="radio" name="mode" value="cuatrimestral" required autofocus> Cuatrimestral<br>
+                                    <input id="mode" type="radio" name="mode" value="trimestral" required autofocus> Trimestral<br>
+
+                                    @if ($errors->has('mode'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('mode') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div id="gradeDiv" style="display: none" class="form-group{{ $errors->has('grade') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <label for="grade" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿Qué nivel cursas actualmente?</label>
+
+                                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <input id="grade" type="number" min="1" max="15" class="form-control" name="grade" value="{{ old('grade') }}" required autofocus>
+
+                                    @if ($errors->has('grade'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('grade') }}</strong>
+                                        </span>
+                                    @endif
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('country_study') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="country_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Estudias en México</label>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <input id="country_study" type="radio" name="country_study" value="1" required autofocus onclick="is_mexican()"> Si<br>
                                 <input id="country_study" type="radio" name="country_study" value="0" required autofocus onclick="isnt_mexican()"> No<br>
 
@@ -496,10 +501,10 @@
                             </div>
                         </div>
 
-                        <div id="state_studyDiv" style="display: none" class="form-group{{ $errors->has('state_study') ? ' has-error' : '' }}">
-                            <label for="state_study" class="col-md-4 control-label">Estado donde estudias</label>
+                        <div id="state_studyDiv" style="display: none" class="form-group{{ $errors->has('state_study') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="state_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Estado donde estudias</label>
 
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <input id="state_study" type="text" class="form-control" name="state_study" value="{{ old('state_study') }}" required autofocus>
 
                                 @if ($errors->has('state_study'))
@@ -510,10 +515,10 @@
                             </div>
                         </div>
 
-                        <div id="municipality_studyDiv" style="display: none" class="form-group{{ $errors->has('municipality_study') ? ' has-error' : '' }}">
-                            <label for="municipality_study" class="col-md-4 control-label">Municipio donde estudias</label>
+                        <div id="municipality_studyDiv" style="display: none" class="form-group{{ $errors->has('municipality_study') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="municipality_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Municipio donde estudias</label>
 
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <input id="municipality_study" type="text" class="form-control" name="municipality_study" value="{{ old('municipality_study') }}" required autofocus>
 
                                 @if ($errors->has('municipality_study'))
@@ -524,10 +529,10 @@
                             </div>
                         </div>
 
-                        <div id="plantelEducativoDiv" style="display: none" class="form-group{{ $errors->has('plantelEducativo') ? ' has-error' : '' }}">
-                            <label for="plantelEducativo" class="col-md-4 control-label">Plantel Educativo</label>
+                        <div id="plantelEducativoDiv" style="display: none" class="form-group{{ $errors->has('plantelEducativo') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="plantelEducativo" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Plantel Educativo</label>
 
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <input id="plantelEducativo" type="text" class="form-control" name="plantelEducativo" value="{{ old('plantelEducativo') }}" required autofocus>
 
                                 @if ($errors->has('plantelEducativo'))
@@ -538,10 +543,10 @@
                             </div>
                         </div>
 
-                        <div id="degreeDiv" style="display: none" class="form-group{{ $errors->has('degree') ? ' has-error' : '' }}">
-                            <label for="degree" class="col-md-4 control-label">Carrera</label>
+                        <div id="degreeDiv" style="display: none" class="form-group{{ $errors->has('degree') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="degree" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Carrera</label>
 
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <input id="degree" type="text" class="form-control" name="degree" value="{{ old('degree') }}" required autofocus>
 
                                 @if ($errors->has('degree'))
@@ -552,10 +557,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Register
+                                    Registrar
                                 </button>
                             </div>
                         </div>

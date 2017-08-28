@@ -8,6 +8,7 @@ use App\Auth_userprofile;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -149,5 +150,16 @@ class RegisterController extends Controller
       else{
         \Session::flash('message', 'Activación con exito!');
       }
+      $contrasenia = bcrypt($data['password']);
+      return $this->enviaCorreoActivacion($data['email'], md5($contrasenia), filter_input (INPUT_POST, 'back_url'));
+    }
+    
+    public function enviaCorreoActivacion($correo, $hash, $back_url) {
+        Mail::send('emails.activacion', ['correo' => $correo, 'hash' => $hash], function ($m) use ($correo) {
+            $m->from('ventana@televisioneducativa.gob.mx', 'Ventana Educativa');
+            $m->to($correo)->subject('Activación de correo!');
+        });
+        //        return redirect ($back_url);
+        return view('viewVentana/correoEnviado');
     }
 }

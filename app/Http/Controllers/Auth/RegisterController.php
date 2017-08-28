@@ -160,6 +160,6 @@ class RegisterController extends Controller
             $m->to($correo)->subject('Activación de correo!');
         });
         //        return redirect ($back_url);
-        return view('viewVentana/correoEnviado');
+        return view('emails.correoEnviado');
     }
 }

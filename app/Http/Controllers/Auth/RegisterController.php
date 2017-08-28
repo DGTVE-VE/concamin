@@ -133,7 +133,10 @@ class RegisterController extends Controller
             $auth_userprofile->country = $data['country'];
             $auth_userprofile->city = '';
             $auth_userprofile->save();
-
+            
+            $contrasenia = bcrypt($data['password']);
+            $this->enviaCorreoActivacion($data['email'], md5($contrasenia), filter_input (INPUT_POST, 'back_url'));
+            
             return User::create([
                 'username' => $data['username'],
                 'user_id' => $auth_user->id,
@@ -150,8 +153,6 @@ class RegisterController extends Controller
       else{
         \Session::flash('message', 'Activación con exito!');
       }
-      $contrasenia = bcrypt($data['password']);
-      return $this->enviaCorreoActivacion($data['email'], md5($contrasenia), filter_input (INPUT_POST, 'back_url'));
     }
     
     public function enviaCorreoActivacion($correo, $hash, $back_url) {

@@ -98,12 +98,6 @@ class RegisterController extends Controller
       $itera = '20000';
       $psw = hash_pbkdf2 ("SHA256", $data['password'], $salt, $itera, 0,True);
 
-      print_r(Auth_user::whereemail($data['email'])->first());
-
-      if(empty(Auth_user::whereemail($data['email'])->first())){
-
-          if(empty(Auth_user::whereusername($data['username'])->first())){
-
             $auth_user = new Auth_user;
             $auth_user->username = $data['username'];
             $auth_user->first_name = '';
@@ -133,10 +127,10 @@ class RegisterController extends Controller
             $auth_userprofile->country = $data['country'];
             $auth_userprofile->city = '';
             $auth_userprofile->save();
-            
+
             $contrasenia = bcrypt($data['password']);
             $this->enviaCorreoActivacion($data['email'], md5($contrasenia), filter_input (INPUT_POST, 'back_url'));
-            
+
             return User::create([
                 'username' => $data['username'],
                 'user_id' => $auth_user->id,
@@ -145,19 +139,11 @@ class RegisterController extends Controller
                 'password' => bcrypt($data['password']),
                 'id_profesion' => '10',
             ]);
-          }
-          else {
-            \Session::flash('message', 'Activación con exito!');
-          }
-      }
-      else{
-        \Session::flash('message', 'Activación con exito!');
-      }
     }
-    
+
     public function enviaCorreoActivacion($correo, $hash, $back_url) {
         Mail::send('emails.activacion', ['correo' => $correo, 'hash' => $hash], function ($m) use ($correo) {
-            $m->from('ventana@televisioneducativa.gob.mx', 'Ventana Educativa');
+            $m->from('activacion@catedrainnovatic.mx', 'Catedra Innovatic');
             $m->to($correo)->subject('Activación de correo!');
         });
         //        return redirect ($back_url);

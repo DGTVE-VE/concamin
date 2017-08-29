@@ -1,11 +1,6 @@
-@section('titleVentana')
-Ventana Educativa
-@stop
-@extends('indexVentana')
-@section('menuVentana')
-@include('viewVentana.encabezadoVentana')
-@endsection
-@section('cuerpoVentana')
+@extends('layouts.app')
+
+@section('content')
 <div class = "col-lg-offset-4 col-md-12">
     <br><br>
     <br><br>

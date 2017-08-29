@@ -69,17 +69,17 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <!-- <a href="{{ url('/home') }}">Home</a> -->
                     @else
-                        <a href="{{ url('/login') }}">Iniciar sesión</a>
-                        <a href="{{ url('/register') }}">Registrarse</a>
+                        <!-- <a href="{{ url('/login') }}">Iniciar sesión</a>
+                        <a href="{{ url('/register') }}">Registrarse</a> -->
                     @endif
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    CONCAMIN
+                    <img src="{{ url('imagenes/imagen.png') }}" alt="Página en construcción" width="100%">
                 </div>
             </div>
         </div>

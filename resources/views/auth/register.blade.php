@@ -389,7 +389,7 @@
                         </div>
 
                         <div id="state" style="display: none" class="form-group cp col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                            <label for="cp" class="col-md-4 control-label">Estado</label>
+                            <label for="cp" class="col-md-6 control-label">Estado</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <input id="viewcp1" type="text" class="form-control" name="viewcp1" disabled>
@@ -397,15 +397,15 @@
                         </div>
 
                         <div id="municipality" style="display: none" class="form-group cp col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                            <label for="viewcp2" class="col-lg-6 col-md-6 col-sm-6 col-xs-12control-label">Municipio / Delegación</label>
+                            <label for="viewcp2" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Municipio / Delegación</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <input id="viewcp2" type="text" class="form-control" name="viewcp2" disabled>
                             </div>
                         </div>
 
-                        <div id="colony" style="display: none" class="form-group cp col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label for="viewcp3" class="col-lg-6 col-md-6 col-sm-6 col-xs-12control-label">Colonia</label>
+                        <div id="colony" style="display: none" class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="viewcp3" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Colonia</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <input id="viewcp3" type="text" class="form-control" name="viewcp3" disabled>

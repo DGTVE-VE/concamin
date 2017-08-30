@@ -504,8 +504,7 @@
                             <label for="state_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Estado donde estudias</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <input id="state_study" type="text" class="form-control" name="state_study" value="{{ old('state_study') }}" required autofocus>
-
+                                <select id="state_study" type="text" class="form-control" name="state_study" value="{{ old('state_study') }}" onchange="llenaMunicipio(this.value)" required autofocus></select>
                                 @if ($errors->has('state_study'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('state_study') }}</strong>
@@ -518,7 +517,7 @@
                             <label for="municipality_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Municipio donde estudias</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <input id="municipality_study" type="text" class="form-control" name="municipality_study" value="{{ old('municipality_study') }}" required autofocus>
+                                <select id="municipality_study" type="text" class="form-control" name="municipality_study" value="{{ old('municipality_study') }}" onchange="llenaPlantelEdu(this.value)" required autofocus></select>
 
                                 @if ($errors->has('municipality_study'))
                                     <span class="help-block">
@@ -532,7 +531,7 @@
                             <label for="plantelEducativo" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Plantel Educativo</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <input id="plantelEducativo" type="text" class="form-control" name="plantelEducativo" value="{{ old('plantelEducativo') }}" required autofocus>
+                                <select id="plantelEducativo" type="text" class="form-control" name="plantelEducativo" value="{{ old('plantelEducativo') }}" required autofocus></select>
 
                                 @if ($errors->has('plantelEducativo'))
                                     <span class="help-block">
@@ -651,6 +650,7 @@
     });
   }
 
+
   function searchEmail(){
 
     var email = document.getElementById("email").value;
@@ -702,5 +702,74 @@
 
   }
 
+    // ******   Llenar Select de Estados
+        var xhttp;
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState==4 && this.status == 200){
+                var datosJSON = JSON.parse(this.responseText);
+                for(var i=0; i< datosJSON.length ;i++ ){
+                    var texto = document.createTextNode(datosJSON[i]["entidad"]);
+                    var nodo = document.createElement("option");
+                    nodo.appendChild(texto);
+                    nodo.setAttribute("value",datosJSON[i]["entidad"]);
+                    document.getElementById("state_study").appendChild(nodo);
+                }
+            }
+        };
+        xhttp.open("GET","{{url('/listaEdos')}}", true);
+        xhttp.send();
+
+    // ******   Llenar Select de Municipios
+        function llenaMunicipio(estado){
+            var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if(this.readyState==4 && this.status == 200){
+                    var lstPlantel = document.getElementById("plantelEducativo");
+                    while (lstPlantel.hasChildNodes()) {
+                        lstPlantel.removeChild(lstPlantel.firstChild);
+                    }
+                    var lstMpio = document.getElementById("municipality_study");
+                    while (lstMpio.hasChildNodes()) {
+                        lstMpio.removeChild(lstMpio.firstChild);
+                    }
+                    var datosJSON = JSON.parse(this.responseText);
+                    for(var i=0; i< datosJSON.length ;i++ ){
+                        var texto = document.createTextNode(datosJSON[i]["municipio"]);
+                        var nodo = document.createElement("option");
+                        nodo.appendChild(texto);
+                        nodo.setAttribute("value",datosJSON[i]["municipio"]);
+                        lstMpio.appendChild(nodo);
+                    }
+                }
+            };
+            xhttp.open("GET","{{url('/listaMpio')}}" + "/" + estado, true);
+            xhttp.send();
+        }
+
+    // ******   Llenar Select de centros educativos
+        function llenaPlantelEdu(municipio){
+            var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if(this.readyState==4 && this.status == 200){
+                    var lstPlantel = document.getElementById("plantelEducativo");
+                    while (lstPlantel.hasChildNodes()) {
+                        lstPlantel.removeChild(lstPlantel.firstChild);
+                    }
+                    var datosJSON = JSON.parse(this.responseText);
+                    for(var i=0; i< datosJSON.length ;i++ ){
+                        var texto = document.createTextNode(datosJSON[i]["centro_educativo"]);
+                        var nodo = document.createElement("option");
+                        nodo.appendChild(texto);
+                        nodo.setAttribute("value",datosJSON[i]["centro_educativo"]);
+                        lstPlantel.appendChild(nodo);
+                    }
+                }
+            };
+            xhttp.open("GET","{{url('/listaPlantel')}}" + "/" + municipio, true);
+            xhttp.send();
+        }
 </script>
 @endsection

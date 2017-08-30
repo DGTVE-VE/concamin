@@ -10,4 +10,22 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    
+    public function estado()
+    {
+        $states = \App\Escuelas::distinct()->get(['entidad']);
+        return $states;
+    }
+    
+    public function municipio($entidad)
+    {
+        $states = \App\Escuelas::distinct()->where('entidad', '=', $entidad)->get(['municipio']);
+        return $states;
+    }
+    
+    public function plantelEdu($municipio)
+    {
+        $states = \App\Escuelas::distinct()->where('municipio', '=', $municipio)->get(['centro_educativo']);
+        return $states;
+    }
 }

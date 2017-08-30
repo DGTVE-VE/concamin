@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::any('/states', 'MyController@searchState');
-Route::any('/municipality', 'MyController@searchMunicipality');
-Route::any('/plantel', 'MyController@searchPlantel');
+Route::any('states', 'MyController@searchState');
+Route::any('municipality', 'MyController@searchMunicipality');
+Route::any('plantel', 'MyController@searchPlantel');
+Route::get('username', 'MyController@searchUsername');
+Route::get('email', 'MyController@searchEmail');

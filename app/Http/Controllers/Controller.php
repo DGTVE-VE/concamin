@@ -13,19 +13,19 @@ class Controller extends BaseController
     
     public function estado()
     {
-        $states = \App\Escuelas::distinct()->get(['entidad']);
+        $states = \App\Escuelas::distinct()->orderBy('entidad')->get(['entidad']);
         return $states;
     }
     
     public function municipio($entidad)
     {
-        $states = \App\Escuelas::distinct()->where('entidad', '=', $entidad)->get(['municipio']);
+        $states = \App\Escuelas::distinct()->where('entidad', '=', $entidad)->orderBy('municipio')->get(['municipio']);
         return $states;
     }
     
     public function plantelEdu($municipio)
     {
-        $states = \App\Escuelas::distinct()->where('municipio', '=', $municipio)->get(['centro_educativo']);
+        $states = \App\Escuelas::distinct()->where('municipio', '=', $municipio)->orderBy('centro_educativo')->get(['centro_educativo']);
         return $states;
     }
 }

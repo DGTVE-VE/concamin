@@ -723,6 +723,10 @@
         xhttp.onreadystatechange = function(){
             if(this.readyState==4 && this.status == 200){
                 var datosJSON = JSON.parse(this.responseText);
+                var textoVacio = document.createTextNode("Seleccione");
+                var nodo = document.createElement("option");
+                nodo.appendChild(textoVacio);
+                document.getElementById("state_study").appendChild(nodo);
                 for(var i=0; i< datosJSON.length ;i++ ){
                     var texto = document.createTextNode(datosJSON[i]["entidad"]);
                     var nodo = document.createElement("option");
@@ -750,6 +754,10 @@
                         lstMpio.removeChild(lstMpio.firstChild);
                     }
                     var datosJSON = JSON.parse(this.responseText);
+                    var textoVacio = document.createTextNode("Seleccione");
+                    var nodo = document.createElement("option");
+                    nodo.appendChild(textoVacio);
+                    lstMpio.appendChild(nodo);
                     for(var i=0; i< datosJSON.length ;i++ ){
                         var texto = document.createTextNode(datosJSON[i]["municipio"]);
                         var nodo = document.createElement("option");

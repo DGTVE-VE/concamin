@@ -30,7 +30,7 @@ class Controller extends BaseController
     }
     
     public function activaCorreo(Request $request, $correo, $hash) {
-        $user = \App\User::where('email', '=', $correo)->first();
+        $user = \App\Auth_user::where('email', '=', $correo)->first();
 
         if (md5($user->password) == $hash) {
             $user->activo = 1;

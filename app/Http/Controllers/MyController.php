@@ -16,29 +16,6 @@ class MyController extends Controller
     {
     }
 
-
-    public function searchState()
-    {
-      $states = \App\Escuelas::distinct()->get(['entidad']);
-      echo $_GET['callback'] . "(" . json_encode($states) . ")";
-      // return $states;
-
-    }
-
-    public function searchMunicipality()
-    {
-      $states = \App\Escuelas::distinct()->get(['entidad']);
-      // echo $_GET['callback'] . "(" . json_encode($states) . ")";
-      return $states;
-    }
-
-    public function searchPlantel()
-    {
-      $states = \App\Escuelas::distinct()->get(['entidad']);
-      // echo $_GET['callback'] . "(" . json_encode($states) . ")";
-      return $states;
-    }
-
     public function searchUsername(Request $request){
 
       $username = $request['username'];

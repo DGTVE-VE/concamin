@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="container">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -57,7 +56,7 @@
                             <label for="name" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Nombre de usuario</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
+                                <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}"  required autofocus onchange="searchUsername()">
 
                                 @if ($errors->has('username'))
                                     <span class="help-block">
@@ -71,7 +70,7 @@
                             <label for="email" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Correo</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus onchange="searchEmail()">
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -557,7 +556,7 @@
                         </div>
 
                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                            <button type="submit" class="btn btn-primary">
+                            <button id="register" type="submit" class="btn btn-primary">
                                 Registrar
                             </button>
                         </div>
@@ -651,6 +650,58 @@
     });
   }
 
+
+  function searchEmail(){
+
+    var email = document.getElementById("email").value;
+
+    $.ajax({
+	            url: "{{url('email')}}",
+	            type:'GET',
+	            data: {email : email },
+	            success: function(data) {
+                console.log(email);
+	                if($.isEmptyObject(data.error)){
+	                	console.log(data.success);
+                    document.getElementById("register").disabled = true;
+                    document.getElementById("username").disabled = true;
+	                }else{
+	                	console.log(data.error);
+                    document.getElementById("username").disabled = false;
+                    document.getElementById("register").disabled = false;
+	                }
+	            }
+	  });
+
+
+  }
+
+  function searchUsername(){
+
+    var username = document.getElementById("username").value;
+
+    $.ajax({
+	            url: "{{url('username')}}",
+	            type:'GET',
+	            data: {username : username },
+	            success: function(data) {
+                console.log(username);
+
+                  if($.isEmptyObject(data.error)){
+	                	console.log(data.success);
+                    document.getElementById("register").disabled = true;
+                    document.getElementById("email").disabled = true;
+	                }
+                  else{
+	                	console.log(data.error);
+                    document.getElementById("email").disabled = false;
+                    document.getElementById("register").disabled = false;
+	                }
+	            }
+	  });
+
+  }
+
     // ******   Llenar Select de Estados
         var xhttp;
         xhttp = new XMLHttpRequest();
@@ -704,7 +755,7 @@
             xhttp.open("GET","{{url('/listaMpio')}}" + "/" + estado, true);
             xhttp.send();
         }
-        
+
     // ******   Llenar Select de centros educativos
         function llenaPlantelEdu(municipio){
             var xhttp;

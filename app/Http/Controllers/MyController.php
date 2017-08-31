@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Auth_user;
 
 class MyController extends Controller
 {
@@ -36,5 +37,28 @@ class MyController extends Controller
       $states = \App\Escuelas::distinct()->get(['entidad']);
       // echo $_GET['callback'] . "(" . json_encode($states) . ")";
       return $states;
+    }
+
+    public function searchUsername(Request $request){
+
+      $username = $request['username'];
+
+      if (isset(Auth_user::whereusername($username)->first()->username)) {
+        return response()->json(['success'=>'1']);
+        }else {
+          return response()->json(['error'=>'0']);
+      }
+    }
+
+    public function searchEmail(Request $request){
+
+      $email = $request['email'];
+
+      if (isset(Auth_user::whereemail($email)->first()->email)) {
+        return response()->json(['success'=>'1']);
+        }else {
+          return response()->json(['error'=>'0']);
+      }
+
     }
 }

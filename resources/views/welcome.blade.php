@@ -64,7 +64,7 @@
             }
         </style>
     </head>
-    <body>
+    <body background={{ url('imagenes/fondo.png')}} >
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <img src="{{ url('imagenes/imagen.png') }}" alt="Página en construcción" width="100%">
+                    <img src="{{ url('imagenes/innovatic.png') }}" alt="Página en construcción" width="100%">
                 </div>
             </div>
         </div>

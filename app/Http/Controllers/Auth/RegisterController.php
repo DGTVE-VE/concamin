@@ -149,4 +149,17 @@ class RegisterController extends Controller
         //        return redirect ($back_url);
         return view('emails.correoEnviado');
     }
+    
+    public function activaCorreo(Request $request, $correo, $hash) {
+        $user = \App\User::where('email', '=', $correo)->first();
+
+        if (md5($user->password) == $hash) {
+            $user->activo = 1;
+            $user->save();
+            return Redirect::home()->with('message','¡Bienvenido! Activaste tu cuenta en Cátedra Innovatic 2.0. Ya puedes iniciar sesión');
+//            return view('viewVentana/activacionCorrecta');
+        } else {
+            print 'error';
+        }
+    }
 }

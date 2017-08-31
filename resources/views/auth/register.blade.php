@@ -499,63 +499,68 @@
                                 @endif
                             </div>
                         </div>
+                        <div id="datoPlantelEd" class="col-md-6 text-center" style="display: none; font-weight: bold;">
+                            <br>
+                            <p>Datos del plantel</p>
+                        </div>
+                        <div id="datosPlantel" class="col-md-12" style="display: none; border: solid #d3e0e9 1px; padding:15px;">
+                            <div id="state_studyDiv" class="form-group{{ $errors->has('state_study') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <label for="state_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Estado donde estudias</label>
 
-                        <div id="state_studyDiv" style="display: none" class="form-group{{ $errors->has('state_study') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label for="state_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Estado donde estudias</label>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <select id="state_study" type="text" class="form-control" name="state_study" value="{{ old('state_study') }}" onchange="llenaMunicipio(this.value)" required autofocus></select>
+                                    @if ($errors->has('state_study'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('state_study') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
 
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <select id="state_study" type="text" class="form-control" name="state_study" value="{{ old('state_study') }}" onchange="llenaMunicipio(this.value)" required autofocus></select>
-                                @if ($errors->has('state_study'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('state_study') }}</strong>
-                                    </span>
-                                @endif
+                            <div id="municipality_studyDiv" class="form-group{{ $errors->has('municipality_study') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <label for="municipality_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Municipio donde estudias</label>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <select id="municipality_study" type="text" class="form-control" name="municipality_study" value="{{ old('municipality_study') }}" onchange="llenaPlantelEdu(this.value)" required autofocus></select>
+
+                                    @if ($errors->has('municipality_study'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('municipality_study') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div id="plantelEducativoDiv" class="form-group{{ $errors->has('plantelEducativo') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <label for="plantelEducativo" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Plantel Educativo</label>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <select id="plantelEducativo" type="text" class="form-control" name="plantelEducativo" value="{{ old('plantelEducativo') }}" required autofocus></select>
+
+                                    @if ($errors->has('plantelEducativo'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('plantelEducativo') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div id="degreeDiv" class="form-group{{ $errors->has('degree') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <label for="degree" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Carrera</label>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <input id="degree" type="text" class="form-control" name="degree" value="{{ old('degree') }}" required autofocus>
+
+                                    @if ($errors->has('degree'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('degree') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 
-                        <div id="municipality_studyDiv" style="display: none" class="form-group{{ $errors->has('municipality_study') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label for="municipality_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Municipio donde estudias</label>
-
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <select id="municipality_study" type="text" class="form-control" name="municipality_study" value="{{ old('municipality_study') }}" onchange="llenaPlantelEdu(this.value)" required autofocus></select>
-
-                                @if ($errors->has('municipality_study'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('municipality_study') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div id="plantelEducativoDiv" style="display: none" class="form-group{{ $errors->has('plantelEducativo') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label for="plantelEducativo" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Plantel Educativo</label>
-
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <select id="plantelEducativo" type="text" class="form-control" name="plantelEducativo" value="{{ old('plantelEducativo') }}" required autofocus></select>
-
-                                @if ($errors->has('plantelEducativo'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('plantelEducativo') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div id="degreeDiv" style="display: none" class="form-group{{ $errors->has('degree') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label for="degree" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Carrera</label>
-
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <input id="degree" type="text" class="form-control" name="degree" value="{{ old('degree') }}" required autofocus>
-
-                                @if ($errors->has('degree'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('degree') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="padding-top:20px;">
                             <button id="register" type="submit" class="btn btn-primary">
                                 Registrar
                             </button>
@@ -580,17 +585,13 @@
   }
 
   function is_mexican(){
-    document.getElementById('state_studyDiv').style.display = 'inline';
-    document.getElementById('municipality_studyDiv').style.display = 'inline';
-    document.getElementById('plantelEducativoDiv').style.display = 'inline';
-    document.getElementById('degreeDiv').style.display = 'inline';
+    document.getElementById('datoPlantelEd').style.display = 'inline';
+    document.getElementById('datosPlantel').style.display = 'inline';
   }
 
   function isnt_mexican(){
-    document.getElementById('state_studyDiv').style.display = 'none';
-    document.getElementById('municipality_studyDiv').style.display = 'none';
-    document.getElementById('plantelEducativoDiv').style.display = 'none';
-    document.getElementById('degreeDiv').style.display = 'none';
+    document.getElementById('datoPlantelEd').style.display = 'none';
+    document.getElementById('datosPlantel').style.display = 'none';
   }
 
   function hide(){

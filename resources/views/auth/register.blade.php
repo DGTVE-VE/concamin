@@ -1,15 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+<body background={{ url('imagenes/fondo.png')}}>
 <div class="container">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div id="parent" class="panel panel-default">
+            <div id="parent" class="panel panel-default" style="opacity: 0.8;">
                 <div class="panel-heading text-center">Registro</div>
 
                 @if (Session::has('message'))
                 	<div class="alert alert-info">{{ Session::get('message') }}</div>
                 @endif
+
+                <div id="error" style="display: none;" class="alert alert-danger"></div>
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -52,6 +55,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="email" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Correo</label>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autocomplete="off" required autofocus onchange="searchEmail()">
+
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label for="name" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Nombre de usuario</label>
 
@@ -66,19 +83,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label for="email" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Correo</label>
-
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus onchange="searchEmail()">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
                         <div class="visible-sm col-sm-12"></div>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label for="password" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Contraseña</label>
@@ -566,6 +570,7 @@
         </div>
     </div>
 </div>
+</body>
 
 <script type="text/javascript">
 
@@ -665,10 +670,15 @@
 	                	console.log(data.success);
                     document.getElementById("register").disabled = true;
                     document.getElementById("username").disabled = true;
+                    document.getElementById('error').style.display = 'block';
+                    document.getElementById('error').innerHTML = 'Ya existe un usuario con ese email registrado en MéxicoX';
+                    document.getElementById('email').style.border = "1px solid rgba(255, 0, 0, 0.6)";
 	                }else{
 	                	console.log(data.error);
                     document.getElementById("username").disabled = false;
                     document.getElementById("register").disabled = false;
+                    document.getElementById('error').style.display = 'none';
+                    document.getElementById('email').style.border = "";
 	                }
 	            }
 	  });
@@ -691,11 +701,16 @@
 	                	console.log(data.success);
                     document.getElementById("register").disabled = true;
                     document.getElementById("email").disabled = true;
+                    document.getElementById('error').style.display = 'block';
+                    document.getElementById('error').innerHTML = 'Ya existe un usuario con ese username registrado';
+                    document.getElementById('username').style.border = "1px solid rgba(255, 0, 0, 0.6)";
 	                }
                   else{
 	                	console.log(data.error);
                     document.getElementById("email").disabled = false;
                     document.getElementById("register").disabled = false;
+                    document.getElementById('error').style.display = 'none';
+                    document.getElementById('username').style.border = "";
 	                }
 	            }
 	  });

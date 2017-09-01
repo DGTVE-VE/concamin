@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -147,7 +147,7 @@ class RegisterController extends Controller
             $m->to($correo)->subject('Activación de correo!');
         });
         //        return redirect ($back_url);
-        return view('emails.correoEnviado');
+        return view('emails.correoEnviado')->with('mensaje', '');
     }
 
 }

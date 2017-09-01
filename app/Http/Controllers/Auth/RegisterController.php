@@ -129,7 +129,7 @@ class RegisterController extends Controller
             $auth_userprofile->save();
 
             $contrasenia = bcrypt($data['password']);
-            $this->enviaCorreoActivacion($data['email'], md5($contrasenia), filter_input (INPUT_POST, 'back_url'));
+            $this->enviaCorreoActivacion($data['email'], $psw, filter_input (INPUT_POST, 'back_url'));
 
             return User::create([
                 'username' => $data['username'],

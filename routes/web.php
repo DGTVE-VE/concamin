@@ -23,6 +23,7 @@ Route::get('username', 'MyController@searchUsername');
 Route::get('email', 'MyController@searchEmail');
 Route::get('pws', 'MyController@password');
 
+Route::get('verificaCorreo/{correo}/{hash}', 'Controller@activaCorreo');
 Route::get('/listaEdos', 'Controller@estado');
 Route::get('/listaMpio/{entidad}', 'Controller@municipio');
 Route::get('/listaPlantel/{municipio}', 'Controller@plantelEdu');

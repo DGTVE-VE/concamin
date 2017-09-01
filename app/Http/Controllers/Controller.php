@@ -6,6 +6,9 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use App\Auth_user;
 
 class Controller extends BaseController
 {
@@ -27,5 +30,25 @@ class Controller extends BaseController
     {
         $states = \App\Escuelas::distinct()->where('municipio', '=', $municipio)->orderBy('centro_educativo')->get(['centro_educativo']);
         return $states;
+    }
+
+    public function activaCorreo(Request $request, $correo, $hash) {
+        $user = \App\Auth_user::where('email', '=', $correo)->first();
+        $contracmp = explode('$', $user->password);
+        $contrasenia = $contracmp[3];
+        $contrasenia = str_replace('/','',$contrasenia);
+        if ($user->is_active == 1) {
+            $mensaje = 'Liga Expiró';
+            return view('emails.correoEnviado')->with('mensaje', $mensaje);
+        } else {
+            if ($contrasenia == $hash) {
+                $user->is_active = 1;
+                $user->save();
+                return Redirect::home()->with('message','¡Bienvenido! Activaste tu cuenta en Cátedra Innovatic 2.0. Ya puedes iniciar sesión');
+            } else {
+                $mensaje = 'Liga invalida';
+                return view('emails.correoEnviado')->with('mensaje', $mensaje);
+            }
+        }
     }
 }

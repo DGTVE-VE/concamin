@@ -21,6 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('username', 'MyController@searchUsername');
 Route::get('email', 'MyController@searchEmail');
+Route::get('pws', 'MyController@password');
 
 Route::get('/listaEdos', 'Controller@estado');
 Route::get('/listaMpio/{entidad}', 'Controller@municipio');

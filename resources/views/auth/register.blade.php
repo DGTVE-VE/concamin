@@ -13,6 +13,7 @@
                 @endif
 
                 <div id="error" style="display: none;" class="alert alert-danger"></div>
+                <div id="error-info" style="display: none;" class="alert alert-info"></div>
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -87,7 +88,7 @@
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label for="password" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Contraseña</label>
 
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
@@ -101,22 +102,23 @@
                         <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label for="password-confirm" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Confirma tu contraseña</label>
 
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                            <div id="input_password" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
+                              <button id="valida" style="display: none" type="button" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn btn-info" onclick="validar();">Valida</button>
                         </div>
 
                         <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }} col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <label for="gender" class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">Género</label>
 
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
-                                    <input class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="gender" type="radio" name="gender" value="f" required autofocus> Mujer
+                                    <input class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="f" type="radio" name="gender" value="f" required autofocus> Mujer
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
-                                    <input class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="gender" type="radio" name="gender" value="m" required autofocus> Hombre
+                                    <input class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="m" type="radio" name="gender" value="m" required autofocus> Hombre
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
-                                    <input class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="gender" type="radio" name="gender" value="o" required autofocus> Otro
+                                    <input class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="o" type="radio" name="gender" value="o" required autofocus> Otro
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 @if ($errors->has('gender'))
@@ -671,9 +673,29 @@
 	                	console.log(data.success);
                     document.getElementById("register").disabled = true;
                     document.getElementById("username").disabled = true;
-                    document.getElementById('error').style.display = 'block';
-                    document.getElementById('error').innerHTML = 'Ya existe un usuario con ese email registrado en MéxicoX';
-                    document.getElementById('email').style.border = "1px solid rgba(255, 0, 0, 0.6)";
+                    document.getElementById('error-info').style.display = 'block';
+
+                    var resp = confirm("¿Estas registrado a MéxicoX con ese correo?");
+                    if(resp == true){
+                      document.getElementById('error-info').innerHTML = 'Ingresa la contraseña con la que estas registrado en MéxicoX y confirmala, para validar tus datos';
+
+                      document.getElementById("input_password").classList.remove('col-lg-6');
+                      document.getElementById("input_password").classList.remove('col-md-6');
+                      document.getElementById("input_password").classList.remove('col-sm-6');
+                      document.getElementById("input_password").classList.remove('col-xs-12');
+                      document.getElementById("input_password").classList.add('col-lg-4');
+                      document.getElementById("input_password").classList.add('col-md-4');
+                      document.getElementById("input_password").classList.add('col-sm-4');
+                      document.getElementById("input_password").classList.add('col-xs-10');
+
+                      document.getElementById('valida').style.display = 'inline';
+
+
+                    }
+                    else {
+                      document.getElementById('error').innerHTML = 'Ya existe un usuario con ese email registrado en MéxicoX';
+                      document.getElementById('email').style.border = "1px solid rgba(255, 0, 0, 0.6)";
+                    }
 	                }else{
 	                	console.log(data.error);
                     document.getElementById("username").disabled = false;
@@ -717,6 +739,63 @@
 	  });
 
   }
+
+  function validar(){
+
+    var data0 = document.getElementById("password").value;
+    var data1 = document.getElementById("password-confirm").value;
+    var email = document.getElementById("email").value;
+
+    if (data0 == null || data0 == "") {
+      console.log("null data 0");
+      document.getElementById("register").disabled = true;
+      document.getElementById('error').style.display = 'block';
+      document.getElementById('error').innerHTML = 'Escribe tu contraseña en el campo requerido';
+      document.getElementById('password').style.border = "1px solid rgba(255, 0, 0, 0.6)";
+    }
+    else if(data1 == null || data1 == ""){
+      console.log("data1 null");
+      document.getElementById("register").disabled = true;
+      document.getElementById('error').style.display = 'block';
+      document.getElementById('error').innerHTML = 'Escribe tu contraseña en el campo requerido';
+      document.getElementById('password-confirm').style.border = "1px solid rgba(255, 0, 0, 0.6)";
+    }
+    else if(data0 == data1){
+      console.log(" datas ==");
+      var pwd = data0;
+      $.ajax({
+                url: "{{url('pws')}}",
+                type:'GET',
+                data: {pwd : pwd, email : email },
+                success: function(data) {
+
+                    if($.isEmptyObject(data.error) ){
+                      console.log(data.success);
+                      document.getElementById('username').value = data.username;
+                      document.getElementById('name').value = data.name;
+                      document.getElementById(data.gender).checked = true;
+                      document.getElementById('dateOfBirth').value = data.year_of_birth+'-01-01';
+                      document.getElementById('level_of_education').value = data.level_of_education;
+                      document.getElementById('cp').value = data.mailing_address;
+                      document.getElementById('country').value = data.country;
+                      console.log(data.country);
+                    }
+                    else{
+                      console.log(data.error);
+
+                    }
+                }
+      });
+    }
+    else {
+      document.getElementById("register").disabled = true;
+      document.getElementById('error').style.display = 'block';
+      document.getElementById('error').innerHTML = 'Las contraseñas no coinciden';
+      document.getElementById('password').style.border = "1px solid rgba(255, 0, 0, 0.6)";
+      document.getElementById('password-confirm').style.border = "1px solid rgba(255, 0, 0, 0.6)";
+    }
+  }
+
 
     // ******   Llenar Select de Estados
         var xhttp;

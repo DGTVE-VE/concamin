@@ -96,7 +96,7 @@ class RegisterController extends Controller
     {
       $salt = substr(md5(uniqid()),1,12);
       $itera = '20000';
-      $psw = hash_pbkdf2 ("SHA256", $data['password'], $salt, $itera, 0,True);
+      $psw = base64_encode(hash_pbkdf2 ("SHA256", $data['password'], $salt, $itera, 0,True));
 
             $auth_user = new Auth_user;
             $auth_user->username = $data['username'];
@@ -106,7 +106,7 @@ class RegisterController extends Controller
             $auth_user->is_staff = '0';
             $auth_user->is_superuser = '0';
             $auth_user->email = $data['email'];
-            $auth_user->password = 'pbkdf2_sha256$'.$itera.'$'.$salt.'$'.base64_encode($psw);
+            $auth_user->password = 'pbkdf2_sha256$'.$itera.'$'.$salt.'$'.$psw;
             $auth_user->last_login = date("Y-m-d H:i:s");
             $auth_user->date_joined = date("Y-m-d H:i:s");
             $auth_user->save();
@@ -128,7 +128,6 @@ class RegisterController extends Controller
             $auth_userprofile->city = '';
             $auth_userprofile->save();
 
-            $contrasenia = bcrypt($data['password']);
             $this->enviaCorreoActivacion($data['email'], $psw, filter_input (INPUT_POST, 'back_url'));
 
             return User::create([

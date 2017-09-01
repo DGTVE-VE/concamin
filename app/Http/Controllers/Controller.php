@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use App\Auth_user;
 
 class Controller extends BaseController
@@ -34,13 +35,12 @@ class Controller extends BaseController
     public function activaCorreo(Request $request, $correo, $hash) {
         $user = \App\Auth_user::where('email', '=', $correo)->first();
         $contracmp = explode('$', $user->password);
-        $contrasenia = $contracmp[4];
-        $contrasenia = rtrim($contracmp,'=');
+        $contrasenia = $contracmp[3];
+        //$contrasenia = rtrim($contracmp,'=');
         if ($contrasenia == $hash) {
-            $user->activo = 1;
+            $user->is_active = 1;
             $user->save();
             return Redirect::home()->with('message','¡Bienvenido! Activaste tu cuenta en Cátedra Innovatic 2.0. Ya puedes iniciar sesión');
-//            return view('viewVentana/activacionCorrecta');
         } else {
             print 'error';
         }

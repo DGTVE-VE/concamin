@@ -128,7 +128,8 @@ class RegisterController extends Controller
             $auth_userprofile->city = '';
             $auth_userprofile->save();
 
-            $this->enviaCorreoActivacion($data['email'], $psw, filter_input (INPUT_POST, 'back_url'));
+            $pswAct = str_replace('/','',$psw);
+            $this->enviaCorreoActivacion($data['email'], $pswAct, filter_input (INPUT_POST, 'back_url'));
 
             return User::create([
                 'username' => $data['username'],

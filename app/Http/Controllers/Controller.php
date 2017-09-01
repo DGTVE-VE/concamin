@@ -36,7 +36,7 @@ class Controller extends BaseController
         $user = \App\Auth_user::where('email', '=', $correo)->first();
         $contracmp = explode('$', $user->password);
         $contrasenia = $contracmp[3];
-        //$contrasenia = rtrim($contracmp,'=');
+        $contrasenia = str_replace('/','',$contrasenia);
         if ($contrasenia == $hash) {
             $user->is_active = 1;
             $user->save();

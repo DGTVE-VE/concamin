@@ -684,37 +684,27 @@
                 console.log(email);
 	                if($.isEmptyObject(data.error)){
 	                	console.log(data.success);
-                    document.getElementById("register").disabled = true;
-                    document.getElementById("username").disabled = true;
-                    document.getElementById('error-info').style.display = 'block';
+                        document.getElementById("register").disabled = true;
+                        document.getElementById("username").disabled = true;
+                        document.getElementById('error-info').style.display = 'block';
 
-                    var resp = confirm("¿Estas registrado a MéxicoX con ese correo?");
-                    if(resp == true){
-                      document.getElementById('error-info').innerHTML = 'Ingresa la contraseña con la que estas registrado en MéxicoX y confirmala, para validar tus datos';
-
-                      document.getElementById("input_password").classList.remove('col-lg-6');
-                      document.getElementById("input_password").classList.remove('col-md-6');
-                      document.getElementById("input_password").classList.remove('col-sm-6');
-                      document.getElementById("input_password").classList.remove('col-xs-12');
-                      document.getElementById("input_password").classList.add('col-lg-4');
-                      document.getElementById("input_password").classList.add('col-md-4');
-                      document.getElementById("input_password").classList.add('col-sm-4');
-                      document.getElementById("input_password").classList.add('col-xs-10');
-
-                      document.getElementById('valida').style.display = 'inline';
-
-
-                    }
-                    else {
-                      document.getElementById('error').innerHTML = 'Ya existe un usuario con ese email registrado en MéxicoX';
-                      document.getElementById('email').style.border = "1px solid rgba(255, 0, 0, 0.6)";
-                    }
+                        var resp = alert("Este correo esta asociado a una cuenta de MéxicoX.");
+                        document.getElementById('error-info').innerHTML = 'Ingresa la contraseña con la que estas registrado en MéxicoX y confirmala, para validar tus datos';
+                        document.getElementById("input_password").classList.remove('col-lg-6');
+                        document.getElementById("input_password").classList.remove('col-md-6');
+                        document.getElementById("input_password").classList.remove('col-sm-6');
+                        document.getElementById("input_password").classList.remove('col-xs-12');
+                        document.getElementById("input_password").classList.add('col-lg-4');
+                        document.getElementById("input_password").classList.add('col-md-4');
+                        document.getElementById("input_password").classList.add('col-sm-4');
+                        document.getElementById("input_password").classList.add('col-xs-10');
+                        document.getElementById('valida').style.display = 'inline';
 	                }else{
 	                	console.log(data.error);
-                    document.getElementById("username").disabled = false;
-                    document.getElementById("register").disabled = false;
-                    document.getElementById('error').style.display = 'none';
-                    document.getElementById('email').style.border = "";
+                        document.getElementById("username").disabled = false;
+                        document.getElementById("register").disabled = false;
+                        document.getElementById('error').style.display = 'none';
+                        document.getElementById('email').style.border = "";
 	                }
 	            }
 	  });

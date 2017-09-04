@@ -28,33 +28,6 @@
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label for="name" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Nombre completo</label>
-
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('dateOfBirth') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label for="dateOfBirth" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Fecha de Nacimineto</label>
-
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                <input id="dateOfBirth" type="date" class="form-control" name="dateOfBirth" value="{{ old('dateOfBirth') }}" required autofocus>
-
-                                @if ($errors->has('dateOfBirth'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('dateOfBirth') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label for="email" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Correo</label>
@@ -74,7 +47,7 @@
                             <label for="name" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Nombre de usuario</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}"  required autofocus onchange="searchUsername()">
+                                <input id="username" type="text" class="form-control" name="username" required autofocus onchange="searchUsername()">
 
                                 @if ($errors->has('username'))
                                     <span class="help-block">
@@ -107,6 +80,35 @@
                             </div>
                               <button id="valida" style="display: none" type="button" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn btn-info" onclick="validar();">Valida</button>
                         </div>
+
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="name" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Nombre completo</label>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+
+                                @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('dateOfBirth') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="dateOfBirth" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Fecha de Nacimineto</label>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                <input id="dateOfBirth" type="date" class="form-control" name="dateOfBirth" value="{{ old('dateOfBirth') }}" required autofocus>
+
+                                @if ($errors->has('dateOfBirth'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('dateOfBirth') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
 
                         <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }} col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <label for="gender" class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">Género</label>
@@ -464,10 +466,10 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
-                                    <input id="mode" type="radio" name="mode" value="anual" required autofocus> Anual<br>
-                                    <input id="mode" type="radio" name="mode" value="semestral" required autofocus> Semestral<br>
-                                    <input id="mode" type="radio" name="mode" value="cuatrimestral" required autofocus> Cuatrimestral<br>
-                                    <input id="mode" type="radio" name="mode" value="trimestral" required autofocus> Trimestral<br>
+                                    <input id="mode_input" type="radio" name="mode" value="anual"> Anual<br>
+                                    <input id="mode_input" type="radio" name="mode" value="semestral"> Semestral<br>
+                                    <input id="mode_input" type="radio" name="mode" value="cuatrimestral"> Cuatrimestral<br>
+                                    <input id="mode_input" type="radio" name="mode" value="trimestral"> Trimestral<br>
 
                                     @if ($errors->has('mode'))
                                         <span class="help-block">
@@ -481,7 +483,7 @@
                                 <label for="grade" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿Qué nivel cursas actualmente?</label>
 
                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <input id="grade" type="number" min="1" max="15" class="form-control" name="grade" value="{{ old('grade') }}" required autofocus>
+                                    <input id="grade" type="number" min="1" max="15" class="form-control" name="grade" value="{{ old('grade') }}" required>
 
                                     @if ($errors->has('grade'))
                                         <span class="help-block">
@@ -527,7 +529,7 @@
                                 <label for="municipality_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Municipio donde estudias</label>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <select id="municipality_study" type="text" class="form-control" name="municipality_study" value="{{ old('municipality_study') }}" onchange="llenaPlantelEdu(this.value)" required autofocus></select>
+                                    <select id="municipality_study" type="text" class="form-control" name="municipality_study" value="{{ old('municipality_study') }}" onchange="llenaPlantelEdu(this.value)" required></select>
 
                                     @if ($errors->has('municipality_study'))
                                         <span class="help-block">
@@ -541,7 +543,7 @@
                                 <label for="plantelEducativo" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Plantel Educativo</label>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <select id="plantelEducativo" type="text" class="form-control" name="plantelEducativo" value="{{ old('plantelEducativo') }}" required autofocus></select>
+                                    <select id="plantelEducativo" type="text" class="form-control" name="plantelEducativo" value="{{ old('plantelEducativo') }}" required></select>
 
                                     @if ($errors->has('plantelEducativo'))
                                         <span class="help-block">
@@ -555,7 +557,7 @@
                                 <label for="degree" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Carrera</label>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <input id="degree" type="text" class="form-control" name="degree" value="{{ old('degree') }}" required autofocus>
+                                    <input id="degree" type="text" class="form-control" name="degree" value="{{ old('degree') }}" required>
 
                                     @if ($errors->has('degree'))
                                         <span class="help-block">
@@ -584,21 +586,32 @@
   function student(){
     document.getElementById('modeDiv').style.display = 'inline';
     document.getElementById('gradeDiv').style.display = 'inline';
+    document.getElementById('mode_input').required = true;
+    document.getElementById('grade').required = true;
   }
 
   function isnt_student(){
     document.getElementById('modeDiv').style.display = 'none';
     document.getElementById('gradeDiv').style.display = 'none';
+    document.getElementById('mode_input').required = false;
+    document.getElementById('grade').required = false;
   }
 
   function is_mexican(){
     document.getElementById('datoPlantelEd').style.display = 'inline';
     document.getElementById('datosPlantel').style.display = 'inline';
+    document.getElementById('plantelEducativo').required = true;
+    document.getElementById('degree').required = true;
+    document.getElementById('municipality_study').required = true;
+
   }
 
   function isnt_mexican(){
     document.getElementById('datoPlantelEd').style.display = 'none';
     document.getElementById('datosPlantel').style.display = 'none';
+    document.getElementById('plantelEducativo').required = false;
+    document.getElementById('degree').required = false;
+    document.getElementById('municipality_study').required = false;
   }
 
   function hide(){
@@ -771,6 +784,7 @@
 
                     if($.isEmptyObject(data.error) ){
                       console.log(data.success);
+                      document.getElementById('username').disabled = false;
                       document.getElementById('username').value = data.username;
                       document.getElementById('name').value = data.name;
                       document.getElementById(data.gender).checked = true;
@@ -779,6 +793,8 @@
                       document.getElementById('cp').value = data.mailing_address;
                       document.getElementById('country').value = data.country;
                       console.log(data.country);
+                      document.getElementById("register").disabled = false;
+
                     }
                     else{
                       console.log(data.error);

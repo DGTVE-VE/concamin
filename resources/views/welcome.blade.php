@@ -82,7 +82,7 @@
                     <img src="{{ url('imagenes/innovatic.png') }}" alt="Página en construcción" width="100%">
                 </div>
                 <div>
-                  <h2 style="position:relative">Nos vemos el 8 de Octubre</h2>
+                  <h2 style="position:relative">Nos vemos el 8 de Septiembre</h2>
                 </div>
             </div>
         </div>

@@ -493,7 +493,7 @@
                                   </div>
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('country_study') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div id="localizaPlantel" class="form-group{{ $errors->has('country_study') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12" style="display: none;">
                             <label for="country_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Estudias en México</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -583,9 +583,18 @@
 
 <script type="text/javascript">
 
+    function desactivaCamposPlantel(){
+        document.getElementById('datoPlantelEd').style.display = 'none';
+        document.getElementById('datosPlantel').style.display = 'none';
+        document.getElementById('plantelEducativo').required = false;
+        document.getElementById('degree').required = false;
+        document.getElementById('municipality_study').required = false;
+    }
+    
   function student(){
     document.getElementById('modeDiv').style.display = 'inline';
     document.getElementById('gradeDiv').style.display = 'inline';
+    document.getElementById('localizaPlantel').style.display = 'inline';
     document.getElementById('mode_input').required = true;
     document.getElementById('grade').required = true;
   }
@@ -593,8 +602,12 @@
   function isnt_student(){
     document.getElementById('modeDiv').style.display = 'none';
     document.getElementById('gradeDiv').style.display = 'none';
+    document.getElementById('localizaPlantel').style.display = 'none';
     document.getElementById('mode_input').required = false;
     document.getElementById('grade').required = false;
+    desactivaCamposPlantel();
+    document.getElementById("country_study").value = 0;
+    document.getElementById("country_study").checked = false;
   }
 
   function is_mexican(){
@@ -603,15 +616,10 @@
     document.getElementById('plantelEducativo').required = true;
     document.getElementById('degree').required = true;
     document.getElementById('municipality_study').required = true;
-
   }
 
   function isnt_mexican(){
-    document.getElementById('datoPlantelEd').style.display = 'none';
-    document.getElementById('datosPlantel').style.display = 'none';
-    document.getElementById('plantelEducativo').required = false;
-    document.getElementById('degree').required = false;
-    document.getElementById('municipality_study').required = false;
+    desactivaCamposPlantel();
   }
 
   function hide(){
@@ -675,15 +683,17 @@
   function searchEmail(){
 
     var email = document.getElementById("email").value;
-
     $.ajax({
 	            url: "{{url('email')}}",
 	            type:'GET',
 	            data: {email : email },
 	            success: function(data) {
-                console.log(email);
-	                if($.isEmptyObject(data.error)){
-	                	console.log(data.success);
+                    if(data.success == '2'){
+                        alert("Correo registrado en Innovatic.");
+                        document.getElementById('email').value = '';
+                        document.getElementById('email').focus();
+                    }
+	                else if($.isEmptyObject(data.error)){
                         document.getElementById("register").disabled = true;
                         document.getElementById("username").disabled = true;
                         document.getElementById('error-info').style.display = 'block';
@@ -699,8 +709,8 @@
                         document.getElementById("input_password").classList.add('col-sm-4');
                         document.getElementById("input_password").classList.add('col-xs-10');
                         document.getElementById('valida').style.display = 'inline';
+                        document.getElementById('password').focus();
 	                }else{
-	                	console.log(data.error);
                         document.getElementById("username").disabled = false;
                         document.getElementById("register").disabled = false;
                         document.getElementById('error').style.display = 'none';
@@ -773,22 +783,27 @@
                 success: function(data) {
 
                     if($.isEmptyObject(data.error) ){
-                      console.log(data.success);
-                      document.getElementById('username').disabled = false;
-                      document.getElementById('username').value = data.username;
-                      document.getElementById('name').value = data.name;
-                      document.getElementById(data.gender).checked = true;
-                      document.getElementById('dateOfBirth').value = data.year_of_birth+'-01-01';
-                      document.getElementById('level_of_education').value = data.level_of_education;
-                      document.getElementById('cp').value = data.mailing_address;
-                      document.getElementById('country').value = data.country;
-                      console.log(data.country);
-                      document.getElementById("register").disabled = false;
-
+                        if(data.success == '0'){
+                            document.getElementById('error').style.display = 'block';
+                            document.getElementById('error').innerHTML = 'La contraseña no coincide con la que inicias sesión en MéxicoX';
+                            document.getElementById('password').focus();
+                        }else{
+                          document.getElementById('error-info').style.display = 'none';
+                          document.getElementById('error').style.display = 'none';
+                          document.getElementById('username').disabled = false;
+                          document.getElementById('username').value = data.username;
+                          document.getElementById('name').value = data.name;
+                          document.getElementById(data.gender).checked = true;
+                          document.getElementById('dateOfBirth').value = data.year_of_birth+'-01-01';
+                          document.getElementById('level_of_education').value = data.level_of_education;
+                          document.getElementById('cp').value = data.mailing_address;
+                          document.getElementById('country').value = data.country;
+                          console.log(data.country);
+                          document.getElementById("register").disabled = false;
+                        }
                     }
                     else{
                       console.log(data.error);
-
                     }
                 }
       });
@@ -796,7 +811,7 @@
     else {
       document.getElementById("register").disabled = true;
       document.getElementById('error').style.display = 'block';
-      document.getElementById('error').innerHTML = 'Las contraseñas no coinciden';
+      document.getElementById('error').innerHTML = 'La contraseña y la confirmación no coinciden';
       document.getElementById('password').style.border = "1px solid rgba(255, 0, 0, 0.6)";
       document.getElementById('password-confirm').style.border = "1px solid rgba(255, 0, 0, 0.6)";
     }

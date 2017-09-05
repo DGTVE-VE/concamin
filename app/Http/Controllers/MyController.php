@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Auth_user;
 use App\Auth_userprofile;
+use App\Users;
 
 class MyController extends Controller
 {
@@ -18,26 +19,27 @@ class MyController extends Controller
     }
 
     public function searchUsername(Request $request){
-
-      $username = $request['username'];
-
-      if (isset(Auth_user::whereusername($username)->first()->username)) {
-        return response()->json(['success'=>'1']);
+        $username = $request['username'];
+        
+        if (isset(Auth_user::whereusername($username)->first()->username)) {
+            return response()->json(['success'=>'1']);
         }else {
-          return response()->json(['error'=>'0']);
-      }
+            return response()->json(['error'=>'0']);
+        }
     }
 
     public function searchEmail(Request $request){
-
-      $email = $request['email'];
-
-      if (isset(Auth_user::whereemail($email)->first()->email)) {
-        return response()->json(['success'=>'1']);
-        }else {
-          return response()->json(['error'=>'0']);
-      }
-
+        $email = $request['email'];
+        if (isset(Users::whereemail($email)->first()->email)) {
+            return response()->json(['success'=>'2']);
+        }
+        else{
+            if (isset(Auth_user::whereemail($email)->first()->email)) {
+                return response()->json(['success'=>'1']);
+            }else {
+                return response()->json(['error'=>'0']);
+            }
+        }
     }
 
     protected function password(Request $request){

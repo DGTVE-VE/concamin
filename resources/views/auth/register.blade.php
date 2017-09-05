@@ -466,10 +466,10 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
-                                    <input id="mode_input" type="radio" name="mode" value="anual"> Anual<br>
-                                    <input id="mode_input" type="radio" name="mode" value="semestral"> Semestral<br>
-                                    <input id="mode_input" type="radio" name="mode" value="cuatrimestral"> Cuatrimestral<br>
-                                    <input id="mode_input" type="radio" name="mode" value="trimestral"> Trimestral<br>
+                                    <input id="mode_input" type="radio" name="mode" value="anual" onchange="cambiaPeriodo(this.value)"> Anual<br>
+                                    <input id="mode_input" type="radio" name="mode" value="semestral" onchange="cambiaPeriodo(this.value)"> Semestral<br>
+                                    <input id="mode_input" type="radio" name="mode" value="cuatrimestral" onchange="cambiaPeriodo(this.value)"> Cuatrimestral<br>
+                                    <input id="mode_input" type="radio" name="mode" value="trimestral" onchange="cambiaPeriodo(this.value)"> Trimestral<br>
 
                                     @if ($errors->has('mode'))
                                         <span class="help-block">
@@ -480,7 +480,7 @@
                             </div>
 
                             <div id="gradeDiv" style="display: none" class="form-group{{ $errors->has('grade') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="grade" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿Qué nivel cursas actualmente?</label>
+                                <label for="grade" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿Qué <span id="periodo">año</span> cursas actualmente?</label>
 
                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <input id="grade" type="number" min="1" max="15" class="form-control" name="grade" value="{{ old('grade') }}" required>
@@ -894,6 +894,28 @@
             };
             xhttp.open("GET","{{url('/listaPlantel')}}" + "/" + municipio, true);
             xhttp.send();
+        }
+        
+        function cambiaPeriodo(periodicidad){
+            //alert(periodicidad);
+            switch(periodicidad){
+                case 'anual':
+                    periodo = 'año';
+                break;
+                case 'semestral':
+                    periodo = 'semeste';
+                break;
+                case 'cuatrimestral':
+                    periodo = 'cuatrimeste';
+                break;
+                case 'trimestral':
+                    periodo = 'trimeste';
+                break;
+                default:
+                    periodo = 'año';
+                break;
+            }
+            document.getElementById('periodo').innerHTML = periodo;
         }
 </script>
 @endsection

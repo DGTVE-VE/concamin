@@ -445,12 +445,13 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('is_student') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label for="is_student" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿Eres estudiante?</label>
+                            <label for="is_student" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿Cuál es tu ocupación?</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
-                                    <input id="is_student" type="radio" name="is_student" value="1" required autofocus onclick="student()"> Si<br>
-                                    <input id="is_student" type="radio" name="is_student" value="0" required autofocus onclick="isnt_student()"> No<br>
+                                    <input id="is_student" type="radio" name="is_student" value="1" required autofocus onclick="student()"> Estudiante<br>
+                                    <input id="is_student" type="radio" name="is_student" value="2" required autofocus onclick="esDocente()"> Docente<br>
+                                    <input id="is_student" type="radio" name="is_student" value="0" required autofocus onclick="isnt_student()"> Otro<br>
 
                                 @if ($errors->has('is_student'))
                                     <span class="help-block">
@@ -459,17 +460,32 @@
                                 @endif
                             </div>
                         </div>
+                        <div id="ocupacionDiv" class="form-group{{ $errors->has('ocupacion') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12" style="display:none;">
+                            <label for="ocupacion" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Especifique</label>
 
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <input id="ocupacion" type="text" class="form-control" name="ocupacion" value="{{ old('ocupacion') }}">
+
+                                @if ($errors->has('ocupacion'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('ocupacion') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div id="modeDiv" style="display: none" class="form-group{{ $errors->has('mode') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div id="modeDiv" style="display: none" class="form-group{{ $errors->has('mode') ? ' has-error' : '' }} col-lg-7 col-md-7 col-sm-7 col-xs-12">
                                 <label for="mode" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿En qué modalidad cursas tus estudios?</label>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-
-                                    <input id="mode_input" type="radio" name="mode" value="anual" onchange="cambiaPeriodo(this.value)"> Anual<br>
-                                    <input id="mode_input" type="radio" name="mode" value="semestral" onchange="cambiaPeriodo(this.value)"> Semestral<br>
-                                    <input id="mode_input" type="radio" name="mode" value="cuatrimestral" onchange="cambiaPeriodo(this.value)"> Cuatrimestral<br>
-                                    <input id="mode_input" type="radio" name="mode" value="trimestral" onchange="cambiaPeriodo(this.value)"> Trimestral<br>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <input id="mode_input" type="radio" name="mode" value="anual" onchange="cambiaPeriodo(this.value)"> Anual<br>
+                                        <input id="mode_input" type="radio" name="mode" value="semestral" onchange="cambiaPeriodo(this.value)"> Semestral<br>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <input id="mode_input" type="radio" name="mode" value="cuatrimestral" onchange="cambiaPeriodo(this.value)"> Cuatrimestral<br>
+                                        <input id="mode_input" type="radio" name="mode" value="trimestral" onchange="cambiaPeriodo(this.value)"> Trimestral<br>
+                                    </div>
 
                                     @if ($errors->has('mode'))
                                         <span class="help-block">
@@ -479,10 +495,10 @@
                                 </div>
                             </div>
 
-                            <div id="gradeDiv" style="display: none" class="form-group{{ $errors->has('grade') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="grade" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿Qué <span id="periodo">año</span> cursas actualmente?</label>
+                            <div id="gradeDiv" style="display: none" class="form-group{{ $errors->has('grade') ? ' has-error' : '' }} col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                                <label for="grade" class="col-lg-9 col-md-9 col-sm-9 col-xs-12 control-label">¿Qué <span id="periodo">año</span> cursas actualmente?</label>
 
-                                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <input id="grade" type="number" min="1" max="15" class="form-control" name="grade" value="{{ old('grade') }}" required>
 
                                     @if ($errors->has('grade'))
@@ -494,7 +510,7 @@
                             </div>
                         </div>
                         <div id="localizaPlantel" class="form-group{{ $errors->has('country_study') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12" style="display: none;">
-                            <label for="country_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Estudias en México</label>
+                            <label for="country_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿En un plantel de México?</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <input id="country_study" type="radio" name="country_study" value="1" required autofocus onclick="is_mexican()"> Si<br>
@@ -583,45 +599,85 @@
 
 <script type="text/javascript">
 
-    function desactivaCamposPlantel(){
-        document.getElementById('datoPlantelEd').style.display = 'none';
-        document.getElementById('datosPlantel').style.display = 'none';
-        document.getElementById('plantelEducativo').required = false;
-        document.getElementById('degree').required = false;
-        document.getElementById('municipality_study').required = false;
-    }
-    
   function student(){
-    document.getElementById('modeDiv').style.display = 'inline';
-    document.getElementById('gradeDiv').style.display = 'inline';
-    document.getElementById('localizaPlantel').style.display = 'inline';
-    document.getElementById('mode_input').required = true;
-    document.getElementById('grade').required = true;
+    muestraDatosEstudiante();
+    ocultaDatosOtro();
   }
 
   function isnt_student(){
-    document.getElementById('modeDiv').style.display = 'none';
-    document.getElementById('gradeDiv').style.display = 'none';
-    document.getElementById('localizaPlantel').style.display = 'none';
-    document.getElementById('mode_input').required = false;
-    document.getElementById('grade').required = false;
-    desactivaCamposPlantel();
-    document.getElementById("country_study").value = 0;
-    document.getElementById("country_study").checked = false;
+    ocultaDatosEstudiante();
+    ocultaDatosPlantel();
+    muestraDatosOtro();
+  }
+
+  function esDocente(){
+    ocultaDatosEstudiante();
+    ocultaDatosOtro();
+    muestralocalizaPlantel();
   }
 
   function is_mexican(){
+    muestraDatosPlantel();
+  }
+
+  function isnt_mexican(){
+    ocultaDatosPlantel();
+  }
+  
+  function muestralocalizaPlantel(){
+    document.getElementById('localizaPlantel').style.display = 'inline';
+  }
+  
+  function ocultalocalizaPlantel(){
+    document.getElementById('localizaPlantel').style.display = 'none';
+  }
+  
+  function ocultaDatosPlantel(){
+    document.getElementById('datoPlantelEd').style.display = 'none';
+    document.getElementById('datosPlantel').style.display = 'none';
+    document.getElementById('state_study').required = false;
+    document.getElementById('plantelEducativo').required = false;
+    document.getElementById('degree').required = false;
+    document.getElementById('municipality_study').required = false;
+  }
+  
+  function muestraDatosPlantel(){
     document.getElementById('datoPlantelEd').style.display = 'inline';
     document.getElementById('datosPlantel').style.display = 'inline';
+    document.getElementById('state_study').required = true;
     document.getElementById('plantelEducativo').required = true;
     document.getElementById('degree').required = true;
     document.getElementById('municipality_study').required = true;
   }
-
-  function isnt_mexican(){
-    desactivaCamposPlantel();
+  
+  function ocultaDatosEstudiante(){
+    document.getElementById('modeDiv').style.display = 'none';
+    document.getElementById('gradeDiv').style.display = 'none';
+    document.getElementById('mode_input').required = false;
+    document.getElementById('grade').required = false;
+    document.getElementById("country_study").value = 0;
+    document.getElementById("country_study").checked = false;
+    ocultalocalizaPlantel();
   }
-
+  
+  function muestraDatosEstudiante(){
+    document.getElementById('modeDiv').style.display = 'inline';
+    document.getElementById('gradeDiv').style.display = 'inline';
+    document.getElementById('mode_input').required = true;
+    document.getElementById('grade').required = true;
+    muestralocalizaPlantel();    
+  }
+  
+  function ocultaDatosOtro(){
+    document.getElementById('ocupacionDiv').style.display = 'none';
+    document.getElementById('ocupacionDiv').required = false;
+  }
+  
+  function muestraDatosOtro(){
+    document.getElementById('ocupacionDiv').style.display = 'inline';
+    document.getElementById('ocupacionDiv').required = true;
+  }
+  
   function hide(){
     if(document.getElementById('country').value == "MX"){
       document.getElementById('state').style.display = 'inline';

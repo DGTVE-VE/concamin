@@ -448,11 +448,14 @@
                             <label for="is_student" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿Cuál es tu ocupación?</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding:0px;">
                                     <input id="is_student" type="radio" name="is_student" value="1" required autofocus onclick="student()"> Estudiante<br>
                                     <input id="is_student" type="radio" name="is_student" value="2" required autofocus onclick="esDocente()"> Docente<br>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding:0px;">
+                                    <input id="is_student" type="radio" name="is_student" value="3" required autofocus onclick="esAdtvo()"> Administrativo<br>
                                     <input id="is_student" type="radio" name="is_student" value="0" required autofocus onclick="isnt_student()"> Otro<br>
-
+                                </div>
                                 @if ($errors->has('is_student'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('is_student') }}</strong>
@@ -474,15 +477,15 @@
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div id="modeDiv" style="display: none" class="form-group{{ $errors->has('mode') ? ' has-error' : '' }} col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                            <div id="modeDiv" style="display: none" class="form-group{{ $errors->has('mode') ? ' has-error' : '' }} col-lg-7 col-md-7 col-sm-6 col-xs-12">
                                 <label for="mode" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿En qué modalidad cursas tus estudios?</label>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding:0px;">
                                         <input id="mode_input" type="radio" name="mode" value="anual" onchange="cambiaPeriodo(this.value)"> Anual<br>
                                         <input id="mode_input" type="radio" name="mode" value="semestral" onchange="cambiaPeriodo(this.value)"> Semestral<br>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding:0px;">
                                         <input id="mode_input" type="radio" name="mode" value="cuatrimestral" onchange="cambiaPeriodo(this.value)"> Cuatrimestral<br>
                                         <input id="mode_input" type="radio" name="mode" value="trimestral" onchange="cambiaPeriodo(this.value)"> Trimestral<br>
                                     </div>
@@ -495,10 +498,10 @@
                                 </div>
                             </div>
 
-                            <div id="gradeDiv" style="display: none" class="form-group{{ $errors->has('grade') ? ' has-error' : '' }} col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                                <label for="grade" class="col-lg-9 col-md-9 col-sm-9 col-xs-12 control-label">¿Qué <span id="periodo">año</span> cursas actualmente?</label>
+                            <div id="gradeDiv" style="display: none" class="form-group{{ $errors->has('grade') ? ' has-error' : '' }} col-lg-5 col-md-5 col-sm-6 col-xs-12">
+                                <label for="grade" class="col-lg-9 col-md-9 col-sm-8 col-xs-12 control-label">¿Qué <span id="periodo">año</span> cursas actualmente?</label>
 
-                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                  <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
                                     <input id="grade" type="number" min="1" max="15" class="form-control" name="grade" value="{{ old('grade') }}" required>
 
                                     @if ($errors->has('grade'))
@@ -523,11 +526,11 @@
                                 @endif
                             </div>
                         </div>
-                        <div id="datoPlantelEd" class="col-md-6 text-center" style="display: none; font-weight: bold;">
+                        <div id="datoPlantelEd" class="col-md-6 col-sm-12 col-xs-12 text-center" style="display: none; font-weight: bold;">
                             <br>
                             <p>Datos del plantel</p>
                         </div>
-                        <div id="datosPlantel" class="col-md-12" style="display: none; border: solid #d3e0e9 1px; padding:15px;">
+                        <div id="datosPlantel" class="col-md-12 col-sm-12 col-xs-12" style="display: none; border: solid #d3e0e9 1px; padding:15px;">
                             <div id="state_studyDiv" class="form-group{{ $errors->has('state_study') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="state_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Estado donde estudias</label>
 
@@ -616,6 +619,12 @@
     muestralocalizaPlantel();
   }
 
+  function esAdtvo(){
+    ocultaDatosEstudiante();
+    ocultaDatosOtro();
+    ocultaDatosPlantel();
+  }
+  
   function is_mexican(){
     muestraDatosPlantel();
   }

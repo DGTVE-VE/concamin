@@ -48,6 +48,7 @@
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <input id="username" type="text" class="form-control" name="username" required autofocus onchange="searchUsername()">
+                                <span class="tip tip-input" id="register-username-desc" style="font-size:12px">El nombre que lo identificará al interior de sus cursos - <strong>(No podrá ser cambiado)</strong></span>
 
                                 @if ($errors->has('username'))
                                     <span class="help-block">
@@ -78,7 +79,7 @@
                             <div id="input_password" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
-                              <button id="valida" style="display: none" type="button" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn btn-info" onclick="validar();">Valida</button>
+                              <button title="Presiona el botón para validar tu contraseña con la que te registraste en MéxicoX y cargar tus datos para tu registro en cátedrainnovatic2.0" id="valida" style="display: none" type="button" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn btn-primary" onclick="validar();">Validar</button>
                         </div>
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -86,6 +87,7 @@
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <span class="tip tip-input" id="register-name-desc" style="font-size:12px">Su nombre legal, que aparecerá en los certificados que pueda obtener</span>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -632,15 +634,15 @@
   function isnt_mexican(){
     ocultaDatosPlantel();
   }
-  
+
   function muestralocalizaPlantel(){
     document.getElementById('localizaPlantel').style.display = 'inline';
   }
-  
+
   function ocultalocalizaPlantel(){
     document.getElementById('localizaPlantel').style.display = 'none';
   }
-  
+
   function ocultaDatosPlantel(){
     document.getElementById('datoPlantelEd').style.display = 'none';
     document.getElementById('datosPlantel').style.display = 'none';
@@ -649,7 +651,7 @@
     document.getElementById('degree').required = false;
     document.getElementById('municipality_study').required = false;
   }
-  
+
   function muestraDatosPlantel(){
     document.getElementById('datoPlantelEd').style.display = 'inline';
     document.getElementById('datosPlantel').style.display = 'inline';
@@ -658,7 +660,7 @@
     document.getElementById('degree').required = true;
     document.getElementById('municipality_study').required = true;
   }
-  
+
   function ocultaDatosEstudiante(){
     document.getElementById('modeDiv').style.display = 'none';
     document.getElementById('gradeDiv').style.display = 'none';
@@ -668,25 +670,25 @@
     document.getElementById("country_study").checked = false;
     ocultalocalizaPlantel();
   }
-  
+
   function muestraDatosEstudiante(){
     document.getElementById('modeDiv').style.display = 'inline';
     document.getElementById('gradeDiv').style.display = 'inline';
     document.getElementById('mode_input').required = true;
     document.getElementById('grade').required = true;
-    muestralocalizaPlantel();    
+    muestralocalizaPlantel();
   }
-  
+
   function ocultaDatosOtro(){
     document.getElementById('ocupacionDiv').style.display = 'none';
     document.getElementById('ocupacionDiv').required = false;
   }
-  
+
   function muestraDatosOtro(){
     document.getElementById('ocupacionDiv').style.display = 'inline';
     document.getElementById('ocupacionDiv').required = true;
   }
-  
+
   function hide(){
     if(document.getElementById('country').value == "MX"){
       document.getElementById('state').style.display = 'inline';
@@ -960,7 +962,7 @@
             xhttp.open("GET","{{url('/listaPlantel')}}" + "/" + municipio, true);
             xhttp.send();
         }
-        
+
         function cambiaPeriodo(periodicidad){
             //alert(periodicidad);
             switch(periodicidad){

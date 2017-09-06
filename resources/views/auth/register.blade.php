@@ -504,7 +504,7 @@
                                 <label for="grade" class="col-lg-9 col-md-9 col-sm-8 col-xs-12 control-label">¿Qué <span id="periodo">año</span> cursas actualmente?</label>
 
                                   <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-                                    <input id="grade" type="number" min="1" max="15" class="form-control" name="grade" value="{{ old('grade') }}" required>
+                                    <input id="grade" type="number" min="1" max="15" class="form-control" name="grade" value="{{ old('grade') }}">
 
                                     @if ($errors->has('grade'))
                                         <span class="help-block">
@@ -537,7 +537,7 @@
                                 <label for="state_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Estado donde estudias</label>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <select id="state_study" type="text" class="form-control" name="state_study" value="{{ old('state_study') }}" onchange="llenaMunicipio(this.value)" required autofocus></select>
+                                    <select id="state_study" type="text" class="form-control" name="state_study" value="{{ old('state_study') }}" onchange="llenaMunicipio(this.value)" autofocus></select>
                                     @if ($errors->has('state_study'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('state_study') }}</strong>
@@ -550,7 +550,7 @@
                                 <label for="municipality_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Municipio donde estudias</label>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <select id="municipality_study" type="text" class="form-control" name="municipality_study" value="{{ old('municipality_study') }}" onchange="llenaPlantelEdu(this.value)" required></select>
+                                    <select id="municipality_study" type="text" class="form-control" name="municipality_study" value="{{ old('municipality_study') }}" onchange="llenaPlantelEdu(this.value)"></select>
 
                                     @if ($errors->has('municipality_study'))
                                         <span class="help-block">
@@ -564,7 +564,7 @@
                                 <label for="plantelEducativo" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Plantel Educativo</label>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <select id="plantelEducativo" type="text" class="form-control" name="plantelEducativo" value="{{ old('plantelEducativo') }}" required></select>
+                                    <select id="plantelEducativo" type="text" class="form-control" name="plantelEducativo" value="{{ old('plantelEducativo') }}" ></select>
 
                                     @if ($errors->has('plantelEducativo'))
                                         <span class="help-block">
@@ -574,11 +574,30 @@
                                 </div>
                             </div>
 
+                            <div id="tituloDiv" class="form-group{{ $errors->has('titulo') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <label for="titulo" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Titulo</label>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <select id="titulo" class="form-control" name="titulo" value="{{ old('titulo') }}">
+                                        <option> Seleccione </option>
+                                        <option value="Lic"> Lic. </option>
+                                        <option value="TSU"> T. S. U. </option>
+                                        <option value="Ing"> Ing. </option>
+                                    </select>
+
+                                    @if ($errors->has('titulo'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('titulo') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                            
                             <div id="degreeDiv" class="form-group{{ $errors->has('degree') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="degree" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Carrera</label>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <input id="degree" type="text" class="form-control" name="degree" value="{{ old('degree') }}" required>
+                                    <input id="degree" type="text" class="form-control" name="degree" value="{{ old('degree') }}">
 
                                     @if ($errors->has('degree'))
                                         <span class="help-block">

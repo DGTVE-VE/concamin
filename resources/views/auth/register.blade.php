@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:30px;">
             <div id="parent" class="panel panel-default" style="opacity: 0.8;">
                 <div class="panel-heading text-center">Registro</div>
 

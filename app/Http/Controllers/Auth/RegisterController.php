@@ -73,6 +73,7 @@ class RegisterController extends Controller
               'state_study' => 'string',
               'municipality_study' => 'string',
               'plantelEducativo' => 'string',
+              'titulo' => 'string',
               'degree' => 'string',
           ]);
         }
@@ -105,6 +106,7 @@ class RegisterController extends Controller
               'state_study' => 'string',
               'municipality_study' => 'string',
               'plantelEducativo' => 'string',
+              'titulo' => 'string',
               'degree' => 'string',
           ]);
         }
@@ -119,6 +121,7 @@ class RegisterController extends Controller
               'cp' => 'required|integer|min:1000|max:99999',
               'is_student' => 'required|integer|min:0|max:1',
               'grade' => 'integer|min:1|max:15',
+              'titulo' => 'string',
               'degree' => 'string',
           ]);
         }

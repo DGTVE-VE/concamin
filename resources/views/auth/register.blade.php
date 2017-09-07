@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:30px;">
             <div id="parent" class="panel panel-default" style="opacity: 0.8;">
-                <div class="panel-heading text-center">Registro</div>
+                <!--div class="panel-heading text-center">Registro</div-->
 
                 @if (Session::has('message'))
                 	<div class="alert alert-info">{{ Session::get('message') }}</div>

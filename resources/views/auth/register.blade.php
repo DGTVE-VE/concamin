@@ -12,9 +12,6 @@
                 	<div class="alert alert-info">{{ Session::get('message') }}</div>
                 @endif
 
-                <div id="error" style="display: none;" class="alert alert-danger"></div>
-                <div id="error-info" style="display: none;" class="alert alert-info"></div>
-
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -57,8 +54,8 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="visible-sm col-sm-12"></div>
+                        <div id="error-info" style="display: none;" class="alert alert-info col-sm-12"></div>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label for="password" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Contraseña</label>
 
@@ -81,7 +78,7 @@
                             </div>
                               <button title="Presiona el botón para validar tu contraseña con la que te registraste en MéxicoX y cargar tus datos para tu registro en cátedrainnovatic2.0" id="valida" style="display: none" type="button" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn btn-primary" onclick="validar();">Validar</button>
                         </div>
-
+                        <div id="error" style="display: none;" class="alert alert-danger col-sm-12"></div>
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label for="name" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Nombre completo</label>
 

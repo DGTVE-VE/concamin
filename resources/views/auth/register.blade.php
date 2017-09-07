@@ -30,7 +30,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label for="email" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Correo</label>
+                            <label for="email" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Correo electrónico</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autocomplete="off" required autofocus onchange="searchEmail()">
@@ -446,16 +446,20 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('is_student') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label for="is_student" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿Cuál es tu ocupación?</label>
+                        <div class="form-group{{ $errors->has('is_student') ? ' has-error' : '' }} col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label for="is_student" class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">¿Cuál es tu ocupación?</label>
 
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding:0px;">
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="padding:0px;">
                                     <input id="is_student" type="radio" name="is_student" value="1" required autofocus onclick="student()"> Estudiante<br>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="padding:0px;">
                                     <input id="is_student" type="radio" name="is_student" value="2" required autofocus onclick="esDocente()"> Docente<br>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding:0px;">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="padding:0px;">
                                     <input id="is_student" type="radio" name="is_student" value="3" required autofocus onclick="esAdtvo()"> Administrativo<br>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="padding:0px;">
                                     <input id="is_student" type="radio" name="is_student" value="0" required autofocus onclick="isnt_student()"> Otro<br>
                                 </div>
                                 @if ($errors->has('is_student'))
@@ -530,11 +534,11 @@
                         </div>
                         <div id="datoPlantelEd" class="col-md-6 col-sm-12 col-xs-12 text-center" style="display: none; font-weight: bold;">
                             <br>
-                            <p>Datos del plantel</p>
+                            <p>Datos del plantel donde <span id="etiquetaUbica">Estudias</span></p>
                         </div>
                         <div id="datosPlantel" class="col-md-12 col-sm-12 col-xs-12" style="display: none; border: solid #d3e0e9 1px; padding:15px;">
                             <div id="state_studyDiv" class="form-group{{ $errors->has('state_study') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="state_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Estado donde estudias</label>
+                                <label for="state_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Estado </label>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <select id="state_study" type="text" class="form-control" name="state_study" value="{{ old('state_study') }}" onchange="llenaMunicipio(this.value)" autofocus></select>
@@ -547,7 +551,7 @@
                             </div>
 
                             <div id="municipality_studyDiv" class="form-group{{ $errors->has('municipality_study') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="municipality_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Municipio donde estudias</label>
+                                <label for="municipality_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Municipio</label>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <select id="municipality_study" type="text" class="form-control" name="municipality_study" value="{{ old('municipality_study') }}" onchange="llenaPlantelEdu(this.value)"></select>
@@ -624,6 +628,7 @@
 <script type="text/javascript">
 
   function student(){
+    ocultaDatosPlantel();
     muestraDatosEstudiante();
     ocultaDatosOtro();
   }
@@ -637,6 +642,7 @@
   function esDocente(){
     ocultaDatosEstudiante();
     ocultaDatosOtro();
+    ocultaDatosPlantel();
     muestralocalizaPlantel();
   }
 
@@ -656,6 +662,8 @@
 
   function muestralocalizaPlantel(){
     document.getElementById('localizaPlantel').style.display = 'inline';
+    document.getElementById("country_study").value = 0;
+    document.getElementById("country_study").checked = false;
   }
 
   function ocultalocalizaPlantel(){
@@ -681,16 +689,16 @@
   }
 
   function ocultaDatosEstudiante(){
+    document.getElementById('etiquetaUbica').innerHTML = "laboras";
     document.getElementById('modeDiv').style.display = 'none';
     document.getElementById('gradeDiv').style.display = 'none';
     document.getElementById('mode_input').required = false;
     document.getElementById('grade').required = false;
-    document.getElementById("country_study").value = 0;
-    document.getElementById("country_study").checked = false;
     ocultalocalizaPlantel();
   }
 
   function muestraDatosEstudiante(){
+    document.getElementById('etiquetaUbica').innerHTML = "estudias";
     document.getElementById('modeDiv').style.display = 'inline';
     document.getElementById('gradeDiv').style.display = 'inline';
     document.getElementById('mode_input').required = true;

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<body background={{ url('imagenes/fondo.png')}}>
-<div class="container">
+
+<div class="container-fluid">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div id="parent" class="panel panel-default" style="opacity: 0.8;">
@@ -620,7 +620,6 @@
         </div>
     </div>
 </div>
-</body>
 
 <script type="text/javascript">
 

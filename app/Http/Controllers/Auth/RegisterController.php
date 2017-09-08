@@ -61,7 +61,7 @@ class RegisterController extends Controller
 
       if(isset(Auth_user::whereemail($data['email'])->first()->email) && ( $psw ==  $pass[3] ) ){
 
-        if($data['is_student'] == 1 && $data['country_study'] == 1){
+        if($data['is_student'] == 1 ){
           return Validator::make($data, [
               'username' => 'required|string|max:255|unique:users',
               'email' => 'required|string|email|max:255|unique:users',
@@ -78,31 +78,32 @@ class RegisterController extends Controller
               'degree' => 'string',
           ]);
         }
-        else if($data['is_student'] == 1 && $data['country_study'] == 0){
-          return Validator::make($data, [
-              'username' => 'required|string|max:255|unique:users',
-              'email' => 'required|string|email|max:255|unique:users',
-              'password' => 'required|string|min:6|confirmed',
-              'is_student' => 'required|integer|min:0|max:3',
-              'mode' => 'string',
-              'grade' => 'integer|min:1|max:15',
-              'level_of_education' => 'string',
-              'country_study' => 'string',
-          ]);
-        }
+        // else if($data['is_student'] == 1 && $data['country_study'] == 0){
+        //   return Validator::make($data, [
+        //       'username' => 'required|string|max:255|unique:users',
+        //       'email' => 'required|string|email|max:255|unique:users',
+        //       'password' => 'required|string|min:6|confirmed',
+        //       'is_student' => 'required|integer|min:0|max:3',
+        //       'mode' => 'string',
+        //       'grade' => 'integer|min:1|max:15',
+        //       'level_of_education' => 'string',
+        //       'country_study' => 'string',
+        //   ]);
+        // }
         else{
           return Validator::make($data, [
               'username' => 'required|string|max:255|unique:users',
               'email' => 'required|string|email|max:255|unique:users',
               'password' => 'required|string|min:6|confirmed',
               'is_student' => 'required|integer|min:0|max:3',
+              'degree' => 'string',
           ]);
         }
 
       }
       else {
 
-        if($data['is_student'] == 1 && $data['country_study'] == 1){
+        if($data['is_student'] == 1 ){
           return Validator::make($data, [
               'username' => 'required|string|max:255|unique:users',
               'email' => 'required|string|email|max:255|unique:users',
@@ -123,18 +124,18 @@ class RegisterController extends Controller
               'degree' => 'string',
           ]);
         }
-        else if($data['is_student'] == 1 && $data['country_study'] == 0){
-          return Validator::make($data, [
-              'username' => 'required|string|max:255|unique:users',
-              'email' => 'required|string|email|max:255|unique:users',
-              'password' => 'required|string|min:6|confirmed',
-              'is_student' => 'required|integer|min:0|max:3',
-              'mode' => 'string',
-              'grade' => 'integer|min:1|max:15',
-              'level_of_education' => 'string',
-              'country_study' => 'string',
-          ]);
-        }
+        // else if($data['is_student'] == 1 && $data['country_study'] == 0){
+        //   return Validator::make($data, [
+        //       'username' => 'required|string|max:255|unique:users',
+        //       'email' => 'required|string|email|max:255|unique:users',
+        //       'password' => 'required|string|min:6|confirmed',
+        //       'is_student' => 'required|integer|min:0|max:3',
+        //       'mode' => 'string',
+        //       'grade' => 'integer|min:1|max:15',
+        //       'level_of_education' => 'string',
+        //       'country_study' => 'string',
+        //   ]);
+        // }
         else{
           return Validator::make($data, [
               'username' => 'required|string|max:255|unique:users',

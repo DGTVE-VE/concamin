@@ -890,6 +890,7 @@
                           document.getElementById('country').value = data.country;
                           console.log(data.country);
                           document.getElementById("register").disabled = false;
+                          validarcp();
                         }
                     }
                     else{

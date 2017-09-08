@@ -13,22 +13,22 @@ use App\Auth_user;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    
+
     public function estado()
     {
         $states = \App\Escuelas::distinct()->orderBy('entidad')->get(['entidad']);
         return $states;
     }
-    
+
     public function municipio($entidad)
     {
         $states = \App\Escuelas::distinct()->where('entidad', '=', $entidad)->orderBy('municipio')->get(['municipio']);
         return $states;
     }
-    
-    public function plantelEdu($municipio)
+
+    public function plantelEdu($entidad, $municipio)
     {
-        $states = \App\Escuelas::distinct()->where('municipio', '=', $municipio)->orderBy('centro_educativo')->get(['centro_educativo']);
+        $states = \App\Escuelas::distinct()->where('entidad', '=', $entidad)->where('municipio', '=', $municipio)->orderBy('centro_educativo')->get(['centro_educativo']);
         return $states;
     }
 

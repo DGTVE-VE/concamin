@@ -551,7 +551,7 @@
                                 <label for="municipality_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Municipio</label>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <select id="municipality_study" type="text" class="form-control" name="municipality_study" value="{{ old('municipality_study') }}" onchange="llenaPlantelEdu(this.value)"></select>
+                                    <select id="municipality_study" type="text" class="form-control" name="municipality_study" value="{{ old('municipality_study') }}" onchange="llenaPlantelEdu( document.getElementById('state_study').value ,this.value)"></select>
 
                                     @if ($errors->has('municipality_study'))
                                         <span class="help-block">
@@ -593,7 +593,7 @@
                                     @endif
                                 </div>
                             </div>
-                            
+
                             <div id="degreeDiv" class="form-group{{ $errors->has('degree') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="degree" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Carrera</label>
 
@@ -647,7 +647,7 @@
     ocultaDatosOtro();
     ocultaDatosPlantel();
   }
-  
+
   function is_mexican(){
     muestraDatosPlantel();
   }
@@ -963,7 +963,7 @@
         }
 
     // ******   Llenar Select de centros educativos
-        function llenaPlantelEdu(municipio){
+        function llenaPlantelEdu(estado, municipio){
             var xhttp;
             xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
@@ -982,7 +982,7 @@
                     }
                 }
             };
-            xhttp.open("GET","{{url('/listaPlantel')}}" + "/" + municipio, true);
+            xhttp.open("GET","{{url('/listaPlantel')}}" + "/" + estado + "/" + municipio, true);
             xhttp.send();
         }
 

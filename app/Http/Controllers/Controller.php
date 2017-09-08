@@ -51,4 +51,9 @@ class Controller extends BaseController
             }
         }
     }
+    
+    public function activacion()
+    {
+        return view('emails.activacion');
+    }
 }

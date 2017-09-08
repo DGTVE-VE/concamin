@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('username', 'MyController@searchUsername');
 Route::get('email', 'MyController@searchEmail');
 Route::get('pws', 'MyController@password');
+Route::get('pruebaCorreo', 'Controller@activacion');
 
 Route::get('verificaCorreo/{correo}/{hash}', 'Controller@activaCorreo');
 Route::get('/listaEdos', 'Controller@estado');

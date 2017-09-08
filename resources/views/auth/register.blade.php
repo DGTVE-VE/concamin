@@ -519,8 +519,8 @@
                             <label for="country_study" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">¿En un plantel de México?</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <input id="country_study" type="radio" name="country_study" value="1" required autofocus onclick="is_mexican()"> Si<br>
-                                <input id="country_study" type="radio" name="country_study" value="0" required autofocus onclick="isnt_mexican()"> No<br>
+                                <input id="country_study" type="radio" name="country_study" value="1" autofocus onclick="is_mexican()"> Si<br>
+                                <input id="country_study" type="radio" name="country_study" value="0" autofocus onclick="isnt_mexican()"> No<br>
 
                                 @if ($errors->has('country_study'))
                                     <span class="help-block">

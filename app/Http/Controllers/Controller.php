@@ -54,6 +54,14 @@ class Controller extends BaseController
     
     public function activacion()
     {
-        return view('emails.activacion');
+        return view('emails.correoEnviado');
+    }
+    
+    public function enviaCorreoActivacion($correo, $hash, $back_url) {
+        Mail::send('emails.activacion', ['correo' => $correo, 'hash' => $hash], function ($m) use ($correo) {
+            $m->from('activacion@catedrainnovatic.mx', 'Cátedra Innovatic');
+            $m->to($correo)->subject('Activación de correo!');
+        });
+        return redirect('activaEnviada');
     }
 }

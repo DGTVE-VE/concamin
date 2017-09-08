@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="col-sm-12">
-            <img src="{{url('imagenes/envioCorreo/encabezadoActivacion.png')}}" alt="Catedra innovatic" class="image-responsive" style="width:100%"/>
+            <img src="{{url('imagenes/envioCorreo/encabezadoActivacion.png')}}" alt="Cátedra innovatic" class="image-responsive" style="width:100%"/>
         </div>
         <div class="col-sm-12">
             <h2> ¡Hola! </h2>

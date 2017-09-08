@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Auth_user;
 use App\Auth_userprofile;
+use App\Student_courseenrollment;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -178,6 +179,17 @@ class RegisterController extends Controller
       if(isset(Auth_user::whereemail($data['email'])->first()->email) && ( $psw ==  $pass[3] ) ){
           $auth_user = Auth_user::whereemail($data['email'])->first();
 
+          if( empty(Student_courseenrollment::whereuser_id($auth_user->id)->wherecourse_id("course-v1:CONCAMIN-TECNM+CVI217101X+2017_10")->first() ) ){
+            $registro_curso = new Student_courseenrollment;
+            $registro_curso->user_id = $auth_user->id;
+            $registro_curso->course_id = "course-v1:CONCAMIN-TECNM+CVI217101X+2017_10";
+            $registro_curso->created = date("Y-m-d H:i:s");
+            $registro_curso->is_active = 1;
+            $registro_curso->mode = "honor";
+            $registro_curso->save();
+
+          }
+
           return User::create([
               'username' => $data['username'],
               'user_id' => $auth_user->id,
@@ -220,6 +232,14 @@ class RegisterController extends Controller
           $auth_userprofile->country = $data['country'];
           $auth_userprofile->city = '';
           $auth_userprofile->save();
+
+          $registro_curso = new Student_courseenrollment;
+          $registro_curso->user_id = $auth_user->id;
+          $registro_curso->course_id = "course-v1:CONCAMIN-TECNM+CVI217101X+2017_10";
+          $registro_curso->created = date("Y-m-d H:i:s");
+          $registro_curso->is_active = 1;
+          $registro_curso->mode = "honor";
+          $registro_curso->save();
 
           $pswAct = str_replace('/','',$psw);
           $this->enviaCorreoActivacion($data['email'], $pswAct, filter_input (INPUT_POST, 'back_url'));

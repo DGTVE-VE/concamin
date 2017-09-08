@@ -155,10 +155,10 @@ class RegisterController extends Controller
       if(isset(Auth_user::whereemail($data['email'])->first()->email) && ( $psw ==  $pass[3] ) ){
           $auth_user = Auth_user::whereemail($data['email'])->first();
 
-          if( empty(Student_courseenrollment::whereuser_id($auth_user->id)->wherecourse_id("course-v1:CONCAMIN.MX+M-innovatic2.0")->first() ) ){
+          if( empty(Student_courseenrollment::whereuser_id($auth_user->id)->wherecourse_id("course-v1:CONCAMIN-TECNM+CVI217101X+2017_10")->first() ) ){
             $registro_curso = new Student_courseenrollment;
             $registro_curso->user_id = $auth_user->id;
-            $registro_curso->course_id = "course-v1:CONCAMIN.MX+M-innovatic2.0";
+            $registro_curso->course_id = "course-v1:CONCAMIN-TECNM+CVI217101X+2017_10";
             $registro_curso->created = date("Y-m-d H:i:s");
             $registro_curso->is_active = 1;
             $registro_curso->mode = "honor";
@@ -211,7 +211,7 @@ class RegisterController extends Controller
 
           $registro_curso = new Student_courseenrollment;
           $registro_curso->user_id = $auth_user->id;
-          $registro_curso->course_id = "course-v1:CONCAMIN.MX+M-innovatic2.0";
+          $registro_curso->course_id = "course-v1:CONCAMIN-TECNM+CVI217101X+2017_10";
           $registro_curso->created = date("Y-m-d H:i:s");
           $registro_curso->is_active = 1;
           $registro_curso->mode = "honor";

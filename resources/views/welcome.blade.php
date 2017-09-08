@@ -64,20 +64,22 @@
             }
         </style>
     </head>
-    <body background={{ url('imagenes/fondo.png')}} >
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
+    <body>
+      <iframe src="http://catedra.grupoplenum.com" width="100%" height="100%" style="border:none;"></iframe>
+    <!-- <body> -->
+        <!-- <div class="flex-center position-ref full-height"> -->
+            <!-- @if (Route::has('login')) -->
+                <!-- <div class="top-right links"> -->
+                    <!-- @if (Auth::check()) -->
                         <!-- <a href="{{ url('/home') }}">Home</a> -->
-                    @else
+                    <!-- @else -->
                         <!-- <a href="{{ url('/login') }}">Iniciar sesión</a>
                         <a href="{{ url('/register') }}">Registrarse</a> -->
-                    @endif
-                </div>
-            @endif
+                    <!-- @endif -->
+                <!-- </div> -->
+            <!-- @endif -->
 
-            <div class="content">
+            <!-- <div class="content">
                 <div class="title m-b-md">
                     <img src="{{ url('imagenes/innovatic.png') }}" alt="Página en construcción" width="100%">
                 </div>
@@ -85,6 +87,6 @@
                   <h2 style="position:relative">Nos vemos el 8 de Septiembre</h2>
                 </div>
             </div>
-        </div>
+        </div> -->
     </body>
 </html>

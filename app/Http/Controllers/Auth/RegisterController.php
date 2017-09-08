@@ -31,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = 'activaEnviada';
 
     /**
      * Create a new controller instance.
@@ -243,7 +243,7 @@ class RegisterController extends Controller
           $registro_curso->save();
 
           $pswAct = str_replace('/','',$psw);
-          Controller::enviaCorreoActivacion($data['email'], $pswAct, filter_input (INPUT_POST, 'back_url'));
+          $this->enviaCorreoActivacion($data['email'], $pswAct, filter_input (INPUT_POST, 'back_url'));
 
           return User::create([
               'username' => $data['username'],
@@ -256,6 +256,13 @@ class RegisterController extends Controller
           ]);
 
         }
+    }
+
+    public function enviaCorreoActivacion($correo, $hash, $back_url) {
+        Mail::send('emails.activacion', ['correo' => $correo, 'hash' => $hash], function ($m) use ($correo) {
+            $m->from('activacion@catedrainnovatic.mx', 'Cátedra Innovatic');
+            $m->to($correo)->subject('Activación de correo!');
+        });
     }
 
 }

@@ -593,12 +593,13 @@
                                     @endif
                                 </div>
                             </div>
+                            </div>
 
                             <div id="degreeDiv" class="form-group{{ $errors->has('degree') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="degree" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Carrera</label>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <input id="degree" type="text" class="form-control" name="degree" value="{{ old('degree') }}">
+                                    <input id="degree" type="text" class="form-control" name="degree" value="{{ old('degree') }}" autofocus required>
 
                                     @if ($errors->has('degree'))
                                         <span class="help-block">
@@ -607,7 +608,7 @@
                                     @endif
                                 </div>
                             </div>
-                        </div>
+
 
                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="padding-top:20px;">
                             <button id="register" type="submit" class="btn btn-primary">
@@ -671,7 +672,7 @@
     document.getElementById('datosPlantel').style.display = 'none';
     document.getElementById('state_study').required = false;
     document.getElementById('plantelEducativo').required = false;
-    document.getElementById('degree').required = false;
+    // document.getElementById('degree').required = false;
     document.getElementById('municipality_study').required = false;
   }
 
@@ -680,7 +681,7 @@
     document.getElementById('datosPlantel').style.display = 'inline';
     document.getElementById('state_study').required = true;
     document.getElementById('plantelEducativo').required = true;
-    document.getElementById('degree').required = true;
+    // document.getElementById('degree').required = true;
     document.getElementById('municipality_study').required = true;
   }
 

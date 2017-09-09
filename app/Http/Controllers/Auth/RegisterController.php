@@ -74,7 +74,7 @@ class RegisterController extends Controller
               'state_study' => 'string',
               'municipality_study' => 'string',
               'plantelEducativo' => 'string',
-              'titulo' => 'string',
+              'titulo' => 'string|min:3',
               'degree' => 'string',
           ]);
         }
@@ -120,7 +120,7 @@ class RegisterController extends Controller
               'state_study' => 'string',
               'municipality_study' => 'string',
               'plantelEducativo' => 'string',
-              'titulo' => 'string',
+              'titulo' => 'string|min:3',
               'degree' => 'string',
           ]);
         }
@@ -191,15 +191,66 @@ class RegisterController extends Controller
 
           }
 
-          return User::create([
-              'username' => $data['username'],
-              'user_id' => $auth_user->id,
-              'is_student' => $data['is_student'],
-              'email' => $data['email'],
-              'password' => bcrypt($data['password']),
-              'id_profesion' => $data['degree'],
-              'titulo' => $data['titulo'],
-          ]);
+          if( ($data['is_student'] == '1') && ($data['country_study'] == '1' )){
+
+            return User::create([
+                'username' => $data['username'],
+                'user_id' => $auth_user->id,
+                'is_student' => $data['is_student'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'mode' => $data['degree'],
+                'level' => $data['grade'],
+                'country' => $data['country_study'],
+                'state' => $data['state_study'],
+                'municipality' => $data['municipality_study'],
+                'id_plantel' => $data['plantelEducativo'],
+                'id_profesion' => $data['degree'],
+                'titulo' => $data['titulo'],
+            ]);
+          }
+          elseif ( ($data['is_student'] == '1') && ($data['country_study'] == '0') ){
+            return User::create([
+                'username' => $data['username'],
+                'user_id' => $auth_user->id,
+                'is_student' => $data['is_student'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'mode' => $data['degree'],
+                'level' => $data['grade'],
+                'country' => $data['country_study'],
+                'id_profesion' => $data['degree'],
+                'titulo' => $data['titulo'],
+            ]);
+          }
+          elseif ( ($data['is_student'] == '2') && ($data['country_study'] == '1') ) {
+            return User::create([
+                'username' => $data['username'],
+                'user_id' => $auth_user->id,
+                'is_student' => $data['is_student'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'country' => $data['country_study'],
+                'state' => $data['state_study'],
+                'municipality' => $data['municipality_study'],
+                'id_plantel' => $data['plantelEducativo'],
+                'id_profesion' => $data['degree'],
+                'titulo' => $data['titulo'],
+            ]);
+
+          }else {
+            return User::create([
+                'username' => $data['username'],
+                'user_id' => $auth_user->id,
+                'is_student' => $data['is_student'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'id_profesion' => $data['degree'],
+                'titulo' => $data['titulo'],
+            ]);
+          }
+
+
 
         }
         else {
@@ -245,15 +296,64 @@ class RegisterController extends Controller
           $pswAct = str_replace('/','',$psw);
           $this->enviaCorreoActivacion($data['email'], $pswAct, filter_input (INPUT_POST, 'back_url'));
 
-          return User::create([
-              'username' => $data['username'],
-              'user_id' => $auth_user->id,
-              'is_student' => $data['is_student'],
-              'email' => $data['email'],
-              'password' => bcrypt($data['password']),
-              'id_profesion' => '10',
-              'titulo' => $data['titulo'],
-          ]);
+          if( ($data['is_student'] == '1') && ($data['country_study'] == '1') ){
+
+            return User::create([
+                'username' => $data['username'],
+                'user_id' => $auth_user->id,
+                'is_student' => $data['is_student'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'mode' => $data['degree'],
+                'level' => $data['grade'],
+                'country' => $data['country_study'],
+                'state' => $data['state_study'],
+                'municipality' => $data['municipality_study'],
+                'id_plantel' => $data['plantelEducativo'],
+                'id_profesion' => $data['degree'],
+                'titulo' => $data['titulo'],
+            ]);
+          }
+          elseif ( ($data['is_student'] == '1') && ($data['country_study'] == '0') ) {
+            return User::create([
+                'username' => $data['username'],
+                'user_id' => $auth_user->id,
+                'is_student' => $data['is_student'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'mode' => $data['degree'],
+                'level' => $data['grade'],
+                'country' => $data['country_study'],
+                'id_profesion' => $data['degree'],
+                'titulo' => $data['titulo'],
+            ]);
+          }
+          elseif ( ($data['is_student'] == '2') && ($data['country_study'] == '1') ) {
+            return User::create([
+                'username' => $data['username'],
+                'user_id' => $auth_user->id,
+                'is_student' => $data['is_student'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'country' => $data['country_study'],
+                'state' => $data['state_study'],
+                'municipality' => $data['municipality_study'],
+                'id_plantel' => $data['plantelEducativo'],
+                'id_profesion' => $data['degree'],
+                'titulo' => $data['titulo'],
+            ]);
+
+          }else {
+            return User::create([
+                'username' => $data['username'],
+                'user_id' => $auth_user->id,
+                'is_student' => $data['is_student'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'id_profesion' => $data['degree'],
+                'titulo' => $data['titulo'],
+            ]);
+          }
 
         }
     }

@@ -95,7 +95,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('dateOfBirth') ? ' has-error' : '' }} col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label for="dateOfBirth" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Fecha de Nacimineto</label>
+                            <label for="dateOfBirth" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Fecha de Nacimiento</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <input id="dateOfBirth" type="date" class="form-control" name="dateOfBirth" value="{{ old('dateOfBirth') }}" required autofocus>
@@ -580,7 +580,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <select id="titulo" class="form-control" name="titulo" value="{{ old('titulo') }}">
-                                        <option> Seleccione </option>
+                                        <option value=""> Seleccione </option>
                                         <option value="Lic"> Lic. </option>
                                         <option value="TSU"> T. S. U. </option>
                                         <option value="Ing"> Ing. </option>

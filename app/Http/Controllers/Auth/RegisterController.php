@@ -61,7 +61,7 @@ class RegisterController extends Controller
 
       if(isset(Auth_user::whereemail($data['email'])->first()->email) && ( $psw ==  $pass[3] ) ){
 
-        if($data['is_student'] == 1 ){
+        if($data['is_student'] == '1'   && ($data['country_study'] == '1') ){
           return Validator::make($data, [
               'username' => 'required|string|max:255|unique:users',
               'email' => 'required|string|email|max:255|unique:users',
@@ -78,18 +78,33 @@ class RegisterController extends Controller
               'degree' => 'string',
           ]);
         }
-        // else if($data['is_student'] == 1 && $data['country_study'] == 0){
-        //   return Validator::make($data, [
-        //       'username' => 'required|string|max:255|unique:users',
-        //       'email' => 'required|string|email|max:255|unique:users',
-        //       'password' => 'required|string|min:6|confirmed',
-        //       'is_student' => 'required|integer|min:0|max:3',
-        //       'mode' => 'string',
-        //       'grade' => 'integer|min:1|max:15',
-        //       'level_of_education' => 'string',
-        //       'country_study' => 'string',
-        //   ]);
-        // }
+        elseif ( ($data['is_student'] == '1') && ($data['country_study'] == '0') ){
+          return Validator::make($data, [
+              'username' => 'required|string|max:255|unique:users',
+              'email' => 'required|string|email|max:255|unique:users',
+              'password' => 'required|string|min:6|confirmed',
+              'is_student' => 'required|integer|min:0|max:3',
+              'mode' => 'string',
+              'grade' => 'integer|min:1|max:15',
+              'level_of_education' => 'string',
+              'country_study' => 'integer',
+              'degree' => 'string',
+          ]);
+        }
+        elseif ( ($data['is_student'] == '2') && ($data['country_study'] == '1') ) {
+          return User::create([
+            'username' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'is_student' => 'required|integer|min:0|max:3',
+            'mode' => 'string',
+            'grade' => 'integer|min:1|max:15',
+            'level_of_education' => 'string',
+            'country_study' => 'integer',
+            'degree' => 'string',
+          ]);
+
+        }
         else{
           return Validator::make($data, [
               'username' => 'required|string|max:255|unique:users',
@@ -103,7 +118,7 @@ class RegisterController extends Controller
       }
       else {
 
-        if($data['is_student'] == 1 ){
+        if($data['is_student'] == '1' && $data['country_study'] == '1'){
           return Validator::make($data, [
               'username' => 'required|string|max:255|unique:users',
               'email' => 'required|string|email|max:255|unique:users',
@@ -124,18 +139,39 @@ class RegisterController extends Controller
               'degree' => 'string',
           ]);
         }
-        // else if($data['is_student'] == 1 && $data['country_study'] == 0){
-        //   return Validator::make($data, [
-        //       'username' => 'required|string|max:255|unique:users',
-        //       'email' => 'required|string|email|max:255|unique:users',
-        //       'password' => 'required|string|min:6|confirmed',
-        //       'is_student' => 'required|integer|min:0|max:3',
-        //       'mode' => 'string',
-        //       'grade' => 'integer|min:1|max:15',
-        //       'level_of_education' => 'string',
-        //       'country_study' => 'string',
-        //   ]);
-        // }
+      else if($data['is_student'] == '1' && $data['country_study'] == '0'){
+        return Validator::make($data, [
+            'username' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'dateOfBirth' => 'required|date',
+            'gender' => 'required',
+            'country' => 'required|string',
+            'cp' => 'required|integer|min:1000|max:99999',
+            'is_student' => 'required|integer|min:0|max:3',
+            'mode' => 'string',
+            'grade' => 'integer|min:1|max:15',
+            'level_of_education' => 'string',
+            'country_study' => 'string',
+            'degree' => 'string',
+        ]);
+      }
+      elseif ( ($data['is_student'] == '2') && ($data['country_study'] == '1') ) {
+        return User::create([
+          'username' => 'required|string|max:255|unique:users',
+          'email' => 'required|string|email|max:255|unique:users',
+          'password' => 'required|string|min:6|confirmed',
+          'dateOfBirth' => 'required|date',
+          'gender' => 'required',
+          'country' => 'required|string',
+          'cp' => 'required|integer|min:1000|max:99999',
+          'is_student' => 'required|integer|min:0|max:3',
+          'level_of_education' => 'string',
+          'country_study' => 'integer',
+          'degree' => 'string',
+        ]);
+
+      }
         else{
           return Validator::make($data, [
               'username' => 'required|string|max:255|unique:users',
@@ -146,8 +182,6 @@ class RegisterController extends Controller
               'country' => 'required|string',
               'cp' => 'required|integer|min:1000|max:99999',
               'is_student' => 'required|integer|min:0|max:3',
-              'grade' => 'integer|min:1|max:15',
-              'titulo' => 'string',
               'degree' => 'string',
           ]);
         }
@@ -199,7 +233,7 @@ class RegisterController extends Controller
                 'is_student' => $data['is_student'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
-                'mode' => $data['degree'],
+                'mode' => $data['mode_input'],
                 'level' => $data['grade'],
                 'country' => $data['country_study'],
                 'state' => $data['state_study'],
@@ -216,11 +250,10 @@ class RegisterController extends Controller
                 'is_student' => $data['is_student'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
-                'mode' => $data['degree'],
+                'mode' => $data['mode_input'],
                 'level' => $data['grade'],
                 'country' => $data['country_study'],
                 'id_profesion' => $data['degree'],
-                'titulo' => $data['titulo'],
             ]);
           }
           elseif ( ($data['is_student'] == '2') && ($data['country_study'] == '1') ) {
@@ -235,7 +268,6 @@ class RegisterController extends Controller
                 'municipality' => $data['municipality_study'],
                 'id_plantel' => $data['plantelEducativo'],
                 'id_profesion' => $data['degree'],
-                'titulo' => $data['titulo'],
             ]);
 
           }else {
@@ -246,7 +278,6 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
                 'id_profesion' => $data['degree'],
-                'titulo' => $data['titulo'],
             ]);
           }
 

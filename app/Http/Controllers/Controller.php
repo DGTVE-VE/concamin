@@ -28,7 +28,7 @@ class Controller extends BaseController
 
     public function plantelEdu($entidad, $municipio)
     {
-        $states = \App\Escuelas::distinct()->where('entidad', '=', $entidad)->where('municipio', '=', $municipio)->orderBy('centro_educativo')->get(['centro_educativo']);
+        $states = \App\Escuelas::distinct()->where('entidad', '=', $entidad)->where('municipio', '=', $municipio)->orderBy('centro_educativo')->get();
         return $states;
     }
 
@@ -51,7 +51,7 @@ class Controller extends BaseController
             }
         }
     }
-    
+
     public function activacion()
     {
         return view('emails.correoEnviado');

@@ -979,7 +979,7 @@
                         var texto = document.createTextNode(datosJSON[i]["centro_educativo"]);
                         var nodo = document.createElement("option");
                         nodo.appendChild(texto);
-                        nodo.setAttribute("value",datosJSON[i]["centro_educativo"]);
+                        nodo.setAttribute("value",datosJSON[i]["id"]);
                         lstPlantel.appendChild(nodo);
                     }
                 }

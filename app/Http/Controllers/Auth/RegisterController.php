@@ -250,7 +250,6 @@ class RegisterController extends Controller
                 'is_student' => $data['is_student'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
-                'mode' => $data['mode_input'],
                 'level' => $data['grade'],
                 'country' => $data['country_study'],
                 'id_profesion' => $data['degree'],
@@ -335,7 +334,7 @@ class RegisterController extends Controller
                 'is_student' => $data['is_student'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
-                'mode' => $data['degree'],
+                'mode' => $data['mode_input'],
                 'level' => $data['grade'],
                 'country' => $data['country_study'],
                 'state' => $data['state_study'],
@@ -352,7 +351,6 @@ class RegisterController extends Controller
                 'is_student' => $data['is_student'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
-                'mode' => $data['degree'],
                 'level' => $data['grade'],
                 'country' => $data['country_study'],
                 'id_profesion' => $data['degree'],
@@ -381,8 +379,8 @@ class RegisterController extends Controller
                 'is_student' => $data['is_student'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
+                'country' => $data['country_study'],
                 'id_profesion' => $data['degree'],
-                'titulo' => $data['titulo'],
             ]);
           }
 

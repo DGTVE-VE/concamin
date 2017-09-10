@@ -485,12 +485,12 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding:0px;">
-                                        <input id="mode_input" type="radio" name="mode" value="anual" onchange="cambiaPeriodo(this.value)"> Anual<br>
-                                        <input id="mode_input" type="radio" name="mode" value="semestral" onchange="cambiaPeriodo(this.value)"> Semestral<br>
+                                        <input id="mode_input" type="radio" name="mode_input" value="anual" onchange="cambiaPeriodo(this.value)"> Anual<br>
+                                        <input id="mode_input" type="radio" name="mode_input" value="semestral" onchange="cambiaPeriodo(this.value)"> Semestral<br>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding:0px;">
-                                        <input id="mode_input" type="radio" name="mode" value="cuatrimestral" onchange="cambiaPeriodo(this.value)"> Cuatrimestral<br>
-                                        <input id="mode_input" type="radio" name="mode" value="trimestral" onchange="cambiaPeriodo(this.value)"> Trimestral<br>
+                                        <input id="mode_input" type="radio" name="mode_input" value="cuatrimestral" onchange="cambiaPeriodo(this.value)"> Cuatrimestral<br>
+                                        <input id="mode_input" type="radio" name="mode_input" value="trimestral" onchange="cambiaPeriodo(this.value)"> Trimestral<br>
                                     </div>
 
                                     @if ($errors->has('mode'))
@@ -659,7 +659,6 @@
 
   function muestralocalizaPlantel(){
     document.getElementById('localizaPlantel').style.display = 'inline';
-    document.getElementById("country_study").value = 0;
     document.getElementById("country_study").checked = false;
   }
 

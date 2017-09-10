@@ -67,13 +67,13 @@ class RegisterController extends Controller
               'email' => 'required|string|email|max:255|unique:users',
               'password' => 'required|string|min:6|confirmed',
               'is_student' => 'required|integer|min:0|max:3',
-              'mode' => 'string',
+              'mode_input' => 'string',
               'grade' => 'integer|min:1|max:15',
               'level_of_education' => 'string',
               'country_study' => 'string',
               'state_study' => 'string',
-              'municipality_study' => 'string',
-              'plantelEducativo' => 'string',
+              'municipality_study' => 'required|string',
+              'plantelEducativo' => 'integer',
               'titulo' => 'string|min:3',
               'degree' => 'string',
           ]);
@@ -100,7 +100,9 @@ class RegisterController extends Controller
             'mode' => 'string',
             'grade' => 'integer|min:1|max:15',
             'level_of_education' => 'string',
-            'country_study' => 'integer',
+            'country_study' => 'required|integer',
+            'municipality_study' => 'required|string',
+            'plantelEducativo' => 'integer',
             'degree' => 'string',
           ]);
 
@@ -133,8 +135,8 @@ class RegisterController extends Controller
               'level_of_education' => 'string',
               'country_study' => 'string',
               'state_study' => 'string',
-              'municipality_study' => 'string',
-              'plantelEducativo' => 'string',
+              'municipality_study' => 'required|string',
+              'plantelEducativo' => 'integer',
               'titulo' => 'string|min:3',
               'degree' => 'string',
           ]);
@@ -168,6 +170,8 @@ class RegisterController extends Controller
           'is_student' => 'required|integer|min:0|max:3',
           'level_of_education' => 'string',
           'country_study' => 'integer',
+          'municipality' => 'required|string',
+          'id_plantel' => 'integer',
           'degree' => 'string',
         ]);
 

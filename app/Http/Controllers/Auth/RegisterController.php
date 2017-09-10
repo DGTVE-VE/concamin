@@ -84,7 +84,7 @@ class RegisterController extends Controller
               'email' => 'required|string|email|max:255|unique:users',
               'password' => 'required|string|min:6|confirmed',
               'is_student' => 'required|integer|min:0|max:3',
-              'mode' => 'string',
+              'mode_input' => 'string',
               'grade' => 'integer|min:1|max:15',
               'level_of_education' => 'string',
               'country_study' => 'integer',
@@ -92,20 +92,42 @@ class RegisterController extends Controller
           ]);
         }
         elseif ( ($data['is_student'] == '2') && ($data['country_study'] == '1') ) {
-          return User::create([
+          return Validator::make($data, [
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'is_student' => 'required|integer|min:0|max:3',
-            'mode' => 'string',
-            'grade' => 'integer|min:1|max:15',
             'level_of_education' => 'string',
             'country_study' => 'required|integer',
+            'state_study' => 'string',
             'municipality_study' => 'required|string',
             'plantelEducativo' => 'integer',
+            'titulo' => 'string|min:3',
+            'degree' => 'string',
+          ]);
+        }
+        elseif ( ($data['is_student'] == '2') && ($data['country_study'] == '0') ) {
+          return Validator::make($data, [
+            'username' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'is_student' => 'required|integer|min:0|max:3',
+            'level_of_education' => 'string',
+            'country_study' => 'required|integer',
             'degree' => 'string',
           ]);
 
+        }
+        elseif ( $data['is_student'] == '0' ) {
+          return Validator::make($data, [
+              'username' => 'required|string|max:255|unique:users',
+              'email' => 'required|string|email|max:255|unique:users',
+              'password' => 'required|string|min:6|confirmed',
+              'is_student' => 'required|integer|min:0|max:3',
+              'level_of_education' => 'string',
+              'degree' => 'string',
+              'ocupacion' => 'string',
+          ]);
         }
         else{
           return Validator::make($data, [
@@ -113,6 +135,7 @@ class RegisterController extends Controller
               'email' => 'required|string|email|max:255|unique:users',
               'password' => 'required|string|min:6|confirmed',
               'is_student' => 'required|integer|min:0|max:3',
+              'level_of_education' => 'string',
               'degree' => 'string',
           ]);
         }
@@ -130,7 +153,7 @@ class RegisterController extends Controller
               'country' => 'required|string',
               'cp' => 'required',
               'is_student' => 'required|integer|min:0|max:3',
-              'mode' => 'string',
+              'mode_input' => 'string',
               'grade' => 'integer|min:1|max:15',
               'level_of_education' => 'string',
               'country_study' => 'string',
@@ -151,7 +174,7 @@ class RegisterController extends Controller
             'country' => 'required|string',
             'cp' => 'required',
             'is_student' => 'required|integer|min:0|max:3',
-            'mode' => 'string',
+            'mode_input' => 'string',
             'grade' => 'integer|min:1|max:15',
             'level_of_education' => 'string',
             'country_study' => 'string',
@@ -159,7 +182,7 @@ class RegisterController extends Controller
         ]);
       }
       elseif ( ($data['is_student'] == '2') && ($data['country_study'] == '1') ) {
-        return User::create([
+        return Validator::make($data, [
           'username' => 'required|string|max:255|unique:users',
           'email' => 'required|string|email|max:255|unique:users',
           'password' => 'required|string|min:6|confirmed',
@@ -170,11 +193,39 @@ class RegisterController extends Controller
           'is_student' => 'required|integer|min:0|max:3',
           'level_of_education' => 'string',
           'country_study' => 'integer',
-          'municipality' => 'required|string',
-          'id_plantel' => 'integer',
+          'state_study' => 'string',
+          'municipality_study' => 'required|string',
+          'plantelEducativo' => 'integer',
           'degree' => 'string',
         ]);
-
+      }
+      elseif ( ($data['is_student'] == '2') && ($data['country_study'] == '0') ) {
+        return Validator::make($data, [
+          'username' => 'required|string|max:255|unique:users',
+          'email' => 'required|string|email|max:255|unique:users',
+          'password' => 'required|string|min:6|confirmed',
+          'dateOfBirth' => 'required|date',
+          'gender' => 'required',
+          'country' => 'required|string',
+          'cp' => 'required',
+          'is_student' => 'required|integer|min:0|max:3',
+          'level_of_education' => 'string',
+          'country_study' => 'integer',
+          'degree' => 'string',
+        ]);
+      }
+      elseif ( $data['is_student'] == '0' ) {
+          return Validator::make($data, [
+              'username' => 'required|string|max:255|unique:users',
+              'email' => 'required|string|email|max:255|unique:users',
+              'password' => 'required|string|min:6|confirmed',
+              'dateOfBirth' => 'required|date',
+              'gender' => 'required',
+              'cp' => 'required',
+              'is_student' => 'required|integer|min:0|max:3',
+              'degree' => 'string',
+              'ocupacion' => 'string',
+          ]);
       }
         else{
           return Validator::make($data, [
@@ -183,7 +234,6 @@ class RegisterController extends Controller
               'password' => 'required|string|min:6|confirmed',
               'dateOfBirth' => 'required|date',
               'gender' => 'required',
-              'country' => 'required|string',
               'cp' => 'required',
               'is_student' => 'required|integer|min:0|max:3',
               'degree' => 'string',
@@ -254,6 +304,7 @@ class RegisterController extends Controller
                 'is_student' => $data['is_student'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
+                'mode' => $data['mode_input'],
                 'level' => $data['grade'],
                 'country' => $data['country_study'],
                 'id_profesion' => $data['degree'],
@@ -271,9 +322,32 @@ class RegisterController extends Controller
                 'municipality' => $data['municipality_study'],
                 'id_plantel' => $data['plantelEducativo'],
                 'id_profesion' => $data['degree'],
+                'titulo' => $data['titulo'],
             ]);
-
-          }else {
+          }
+          elseif ( ($data['is_student'] == '2') && ($data['country_study'] == '0') ) {
+            return User::create([
+                'username' => $data['username'],
+                'user_id' => $auth_user->id,
+                'is_student' => $data['is_student'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'country' => $data['country_study'],
+                'id_profesion' => $data['degree'],
+            ]);
+          }
+          elseif ( $data['is_student'] == '0'){
+            return User::create([
+                'username' => $data['username'],
+                'user_id' => $auth_user->id,
+                'is_student' => $data['is_student'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'id_profesion' => $data['degree'],
+                'ocupacion_otra' => $data['ocupacion'],
+            ]);
+          }
+          else {
             return User::create([
                 'username' => $data['username'],
                 'user_id' => $auth_user->id,
@@ -355,10 +429,10 @@ class RegisterController extends Controller
                 'is_student' => $data['is_student'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
+                'mode' => $data['mode_input'],
                 'level' => $data['grade'],
                 'country' => $data['country_study'],
                 'id_profesion' => $data['degree'],
-                'titulo' => $data['titulo'],
             ]);
           }
           elseif ( ($data['is_student'] == '2') && ($data['country_study'] == '1') ) {
@@ -375,8 +449,8 @@ class RegisterController extends Controller
                 'id_profesion' => $data['degree'],
                 'titulo' => $data['titulo'],
             ]);
-
-          }else {
+          }
+          elseif ( ($data['is_student'] == '2') && ($data['country_study'] == '0') ) {
             return User::create([
                 'username' => $data['username'],
                 'user_id' => $auth_user->id,
@@ -384,6 +458,27 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
                 'country' => $data['country_study'],
+                'id_profesion' => $data['degree'],
+            ]);
+          }
+          elseif ( $data['is_student'] == '0'){
+            return User::create([
+                'username' => $data['username'],
+                'user_id' => $auth_user->id,
+                'is_student' => $data['is_student'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'id_profesion' => $data['degree'],
+                'ocupacion_otra' => $data['ocupacion'],
+            ]);
+          }
+          else {
+            return User::create([
+                'username' => $data['username'],
+                'user_id' => $auth_user->id,
+                'is_student' => $data['is_student'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
                 'id_profesion' => $data['degree'],
             ]);
           }

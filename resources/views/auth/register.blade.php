@@ -726,11 +726,21 @@
 
   }
 
+  function soloNumCP(numero){
+    if (/^([0-9])*$/.test(numero))
+      return true;
+    else
+      return false;
+  }
+  
   function validarcp() {
     var cp = document.getElementById("cp").value;
-    console.log(cp);
     var country = document.getElementById("country").value;
-
+    /*if(soloNumCP(document.getElementById("cp").value) == false){
+        alert('Formato de Código Postal incorrecto');
+        cp= "";
+        return;
+    }*/
     var request = $.ajax({
       url: "http://reportes.mexicox.gob.mx/validarcp",
       method: "POST",
@@ -746,17 +756,19 @@
     request.done(function( ms ) {
 
       if (country == "MX") {
-        if ( JSON.stringify(ms[0].Estado) != "undefined" ) {
+        if ( ms[0].Estado == null ) {
+          alert("Código postal no encontrado");
+          document.getElementById("viewcp1").value = "Código postal no encontrado";
+          document.getElementById("viewcp2").value = ms[0].Estado;
+          document.getElementById("viewcp3").value = "";
+          document.getElementById("cp").value = "";
+        }else {
           document.getElementById('state').style.display = 'inline';
           document.getElementById('municipality').style.display = 'inline';
           document.getElementById('colony').style.display = 'inline';
           document.getElementById("viewcp1").value = JSON.stringify(ms[0].Estado);
           document.getElementById("viewcp2").value = JSON.stringify(ms[0].Municipio);
           document.getElementById("viewcp3").value = JSON.stringify(ms[0].Colonia);
-        }else {
-          document.getElementById("viewcp1").value = "Código postal no encontrado";
-          document.getElementById("viewcp2").value = ms[0].Estado;
-          document.getElementById("viewcp3").value = "";
         }
 
       }

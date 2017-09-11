@@ -38,6 +38,7 @@ class RegisterController extends Controller
      *
      * @return void
      */
+     
     public function __construct()
     {
         $this->middleware('guest');
@@ -402,7 +403,9 @@ class RegisterController extends Controller
           $registro_curso->save();
 
           $pswAct = str_replace('/','',$psw);
-          $this->enviaCorreoActivacion($data['email'], $pswAct, filter_input (INPUT_POST, 'back_url'));
+          if(Auth_user::whereemail($data['email'])->first()->is_active == 0){
+            $this->enviaCorreoActivacion($data['email'], $pswAct, filter_input (INPUT_POST, 'back_url'));
+          }
 
           if( ($data['is_student'] == '1') && ($data['country_study'] == '1') ){
 

@@ -98,7 +98,7 @@
                             <label for="dateOfBirth" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Fecha de Nacimiento</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                <input id="dateOfBirth" type="date" class="form-control" name="dateOfBirth" value="{{ old('dateOfBirth') }}" required autofocus>
+                                <input id="dateOfBirth" type="date" class="form-control" name="dateOfBirth" value="{{ old('dateOfBirth') }}" placeholder="mm/dd/yyyy" required autofocus>
 
                                 @if ($errors->has('dateOfBirth'))
                                     <span class="help-block">
@@ -621,7 +621,6 @@
         </div>
     </div>
 </div>
-
 <script type="text/javascript">
 
   function student(){
@@ -731,7 +730,7 @@
     else
       return false;
   }
-  
+
   function validarcp() {
     var cp = document.getElementById("cp").value;
     var country = document.getElementById("country").value;

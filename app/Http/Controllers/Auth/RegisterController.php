@@ -38,7 +38,7 @@ class RegisterController extends Controller
      *
      * @return void
      */
-     
+
     public function __construct()
     {
         $this->middleware('guest');
@@ -77,6 +77,7 @@ class RegisterController extends Controller
               'plantelEducativo' => 'integer',
               'titulo' => 'string|min:3',
               'degree' => 'string',
+              'dateOfBirth' => 'required|integer',
           ]);
         }
         elseif ( ($data['is_student'] == '1') && ($data['country_study'] == '0') ){
@@ -90,6 +91,7 @@ class RegisterController extends Controller
               'level_of_education' => 'string',
               'country_study' => 'integer',
               'degree' => 'string',
+              'dateOfBirth' => 'required|integer',
           ]);
         }
         elseif ( ($data['is_student'] == '2') && ($data['country_study'] == '1') ) {
@@ -105,6 +107,7 @@ class RegisterController extends Controller
             'plantelEducativo' => 'integer',
             'titulo' => 'string|min:3',
             'degree' => 'string',
+            'dateOfBirth' => 'required|integer',
           ]);
         }
         elseif ( ($data['is_student'] == '2') && ($data['country_study'] == '0') ) {
@@ -116,6 +119,7 @@ class RegisterController extends Controller
             'level_of_education' => 'string',
             'country_study' => 'required|integer',
             'degree' => 'string',
+            'dateOfBirth' => 'required|integer',
           ]);
 
         }
@@ -128,6 +132,7 @@ class RegisterController extends Controller
               'level_of_education' => 'string',
               'degree' => 'string',
               'ocupacion' => 'string',
+              'dateOfBirth' => 'required|integer',
           ]);
         }
         else{
@@ -138,6 +143,7 @@ class RegisterController extends Controller
               'is_student' => 'required|integer|min:0|max:3',
               'level_of_education' => 'string',
               'degree' => 'string',
+              'dateOfBirth' => 'required|integer',
           ]);
         }
 
@@ -149,7 +155,7 @@ class RegisterController extends Controller
               'username' => 'required|string|max:255|unique:users',
               'email' => 'required|string|email|max:255|unique:users',
               'password' => 'required|string|min:6|confirmed',
-              'dateOfBirth' => 'required|date',
+              'dateOfBirth' => 'required|integer',
               'gender' => 'required',
               'country' => 'required|string',
               'cp' => 'required',
@@ -170,7 +176,7 @@ class RegisterController extends Controller
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'dateOfBirth' => 'required|date',
+            'dateOfBirth' => 'required|integer',
             'gender' => 'required',
             'country' => 'required|string',
             'cp' => 'required',
@@ -187,7 +193,7 @@ class RegisterController extends Controller
           'username' => 'required|string|max:255|unique:users',
           'email' => 'required|string|email|max:255|unique:users',
           'password' => 'required|string|min:6|confirmed',
-          'dateOfBirth' => 'required|date',
+          'dateOfBirth' => 'required|integer',
           'gender' => 'required',
           'country' => 'required|string',
           'cp' => 'required',
@@ -205,7 +211,7 @@ class RegisterController extends Controller
           'username' => 'required|string|max:255|unique:users',
           'email' => 'required|string|email|max:255|unique:users',
           'password' => 'required|string|min:6|confirmed',
-          'dateOfBirth' => 'required|date',
+          'dateOfBirth' => 'required|integer',
           'gender' => 'required',
           'country' => 'required|string',
           'cp' => 'required',
@@ -220,7 +226,7 @@ class RegisterController extends Controller
               'username' => 'required|string|max:255|unique:users',
               'email' => 'required|string|email|max:255|unique:users',
               'password' => 'required|string|min:6|confirmed',
-              'dateOfBirth' => 'required|date',
+              'dateOfBirth' => 'required|integer',
               'gender' => 'required',
               'cp' => 'required',
               'is_student' => 'required|integer|min:0|max:3',
@@ -233,7 +239,7 @@ class RegisterController extends Controller
               'username' => 'required|string|max:255|unique:users',
               'email' => 'required|string|email|max:255|unique:users',
               'password' => 'required|string|min:6|confirmed',
-              'dateOfBirth' => 'required|date',
+              'dateOfBirth' => 'required|integer',
               'gender' => 'required',
               'cp' => 'required',
               'is_student' => 'required|integer|min:0|max:3',
@@ -386,7 +392,8 @@ class RegisterController extends Controller
           $auth_userprofile->courseware = 'course.xml';
           $auth_userprofile->gender = $data['gender'];
           $auth_userprofile->mailing_address = $data['cp'];
-          $auth_userprofile->year_of_birth = substr($data['dateOfBirth'], 0, 4);
+          $auth_userprofile->year_of_birth = $data['dateOfBirth'];
+          // $auth_userprofile->year_of_birth = substr($data['dateOfBirth'], 0, 4);
           $auth_userprofile->level_of_education = $data['level_of_education'];
           $auth_userprofile->goals = '';
           $auth_userprofile->allow_certificate = '1';

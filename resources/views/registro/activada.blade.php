@@ -11,7 +11,7 @@
 <div class = "col-lg-offset-2 col-lg-8 col-md-12">
     <br><br>
     <div class="col-sm-12">
-        <h2><p style="padding:20px;">Se ha registrado correctamente a Cátedra Virtual Innovatic.</p></h2>
+        <h2><p style="padding:20px;">Se ha registrado correctamente a la Cátedra Virtual INNOVATIC 2.0</p></h2>
 
         <p style="padding:20px;">Su cuenta en MéxicoX actualmente está activa. Por lo que puede ingresar directamente a revisar más detalles sobre el curso en la siguiente liga:</p>
     </div>

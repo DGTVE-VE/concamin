@@ -45,7 +45,8 @@ class Controller extends BaseController
             if ($contrasenia == $hash) {
                 $user->is_active = 1;
                 $user->save();
-                return Redirect::home()->with('message','¡Bienvenido! Activaste tu cuenta en Cátedra Innovatic 2.0. Ya puedes iniciar sesión');
+                return view('registro.activada');
+                //return Redirect::home()->with('message','¡Bienvenido! Activaste tu cuenta en Cátedra Innovatic 2.0. Ya puedes iniciar sesión');
             } else {
                 $mensaje = 'Liga invalida';
                 return view('emails.correoEnviado')->with('mensaje', $mensaje);

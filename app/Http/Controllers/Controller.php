@@ -55,6 +55,7 @@ class Controller extends BaseController
     {
         $correo = Auth::user()->email;
         $valorActivo = \App\Auth_user::whereemail($correo)->first()->is_active;
+        Auth::logout();
         if($valorActivo==0){
             return view('registro.correoEnviado');
         }

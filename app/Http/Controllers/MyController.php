@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Auth_user;
+use App\Oauth2_accesstoken;
 use App\Auth_userprofile;
 use App\Users;
 
@@ -20,7 +21,7 @@ class MyController extends Controller
 
     public function searchUsername(Request $request){
         $username = $request['username'];
-        
+
         if (isset(Auth_user::whereusername($username)->first()->username)) {
             return response()->json(['success'=>'1']);
         }else {
@@ -88,5 +89,30 @@ class MyController extends Controller
       }
 
       $psw = hash_pbkdf2 ("SHA256", $data['password'], $salt, $itera, 0,True);
+    }
+
+    public function client(Request $request){
+
+      $token = $request['token'];
+      $client = $request['username'];
+
+      if( $user_id = Auth_user::whereusername($client)->first() ==! null ){
+          $user_id = Auth_user::whereusername($client)->first()->id;
+
+          if( Oauth2_accesstoken::whereuser_id($user_id)->wheretoken($token)->first() ==! null ){
+            $user = Users::whereuser_id($user_id)->first();
+
+            return response()->json(['Plantel' => $user->id_plantel, 'Profesion' => $user->id_profesion, 'Modo' => $user->mode, 'Nivel' => $user->level]);
+          }
+
+      }
+      else{
+        return response()->json(['Error' => 'Username no encontrado']);
+      }
+
+
+      return 1;
+      // http://catedrainnovatic.mx
+
     }
 }

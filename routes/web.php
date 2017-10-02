@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('admin/oauth2/client', 'MyController@client');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

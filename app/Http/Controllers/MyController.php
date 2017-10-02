@@ -93,7 +93,7 @@ class MyController extends Controller
 
     public function client(Request $request){
 
-      $token = $request['token'];
+      $token = substr($request['token'], 6);
       $client = $request['username'];
 
       if( $user_id = Auth_user::whereusername($client)->first() ==! null ){
@@ -110,9 +110,7 @@ class MyController extends Controller
         return response()->json(['Error' => 'Username no encontrado']);
       }
 
-
       return 1;
-      // http://catedrainnovatic.mx
 
     }
 }

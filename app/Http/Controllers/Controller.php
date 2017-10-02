@@ -39,16 +39,14 @@ class Controller extends BaseController
         $contrasenia = $contracmp[3];
         $contrasenia = str_replace('/','',$contrasenia);
         if ($user->is_active == 1) {
-            $mensaje = 'Liga Expiró';
-            return view('emails.correoEnviado')->with('mensaje', $mensaje);
+            return view('registro.ligaInvalida');
         } else {
             if ($contrasenia == $hash) {
                 $user->is_active = 1;
                 $user->save();
-                return Redirect::home()->with('message','¡Bienvenido! Activaste tu cuenta en Cátedra Innovatic 2.0. Ya puedes iniciar sesión');
+                return view('registro.activada');
             } else {
-                $mensaje = 'Liga invalida';
-                return view('emails.correoEnviado')->with('mensaje', $mensaje);
+                return view('registro.ligaInvalida');
             }
         }
     }
@@ -57,6 +55,7 @@ class Controller extends BaseController
     {
         $correo = Auth::user()->email;
         $valorActivo = \App\Auth_user::whereemail($correo)->first()->is_active;
+        Auth::logout();
         if($valorActivo==0){
             return view('registro.correoEnviado');
         }

@@ -44,7 +44,7 @@
                             <label for="name" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Nombre de usuario</label>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                <input id="username" type="text" class="form-control" name="username" required autofocus onchange="searchUsername()">
+                                <input id="username" type="text" class="form-control" name="username" required autofocus onblur="validaUsuario()" onchange="searchUsername()">
                                 <span class="tip tip-input" id="register-username-desc" style="font-size:12px">El nombre que lo identificará al interior de sus cursos - <strong>(No podrá ser cambiado)</strong></span>
 
                                 @if ($errors->has('username'))
@@ -867,6 +867,14 @@
 </div>
 <script type="text/javascript">
 
+  function validaUsuario(){
+    var cadenaUsuario = document.getElementById("username").value;
+    if(cadenaUsuario.search(/[$=ñ*\s&!/?\\¿]/i)>=0){
+        document.getElementById("username").value = cadenaUsuario.replace(/[$=ñ*\s&!/?\\¿]/gi,"");
+        alert("En nombre de usuario: Evite el uso de ESPACIOS, Ñ y CARACTERES ESPECIALES ($ = * & ! / ¿ ? \\)");
+        document.getElementById("username").focus();
+    }
+  }
   function student(){
     ocultaDatosPlantel();
     muestraDatosEstudiante();
@@ -1068,7 +1076,6 @@
   }
 
   function searchUsername(){
-
     var username = document.getElementById("username").value;
 
     $.ajax({

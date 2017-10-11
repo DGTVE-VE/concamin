@@ -63,6 +63,12 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            @media screen and (-webkit-min-device-pixel-ratio:0) {
+                  iframe{
+                      overflow: auto;
+                      -webkit-overflow-scrolling: touch;
+                  }
+            }
         </style>
     </head>
     <body>

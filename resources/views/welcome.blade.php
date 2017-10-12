@@ -94,6 +94,7 @@
         </style>
     </head>
     <body>
+       <div id="contenedorframe">
       <iframe src="http://catedra.grupoplenum.com"  id="registro-frame" width="100%" height="100%" style="border:none;"></iframe>
     <!-- <body> -->
         <!-- <div class="flex-center position-ref full-height"> -->
@@ -118,4 +119,5 @@
             </div>
         </div> -->
     </body>
+  </div>
 </html>

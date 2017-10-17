@@ -17,9 +17,14 @@
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
-                height: 100vh;
+                /*height: 100vh;*/
                 margin: 0;
-                overflow-y:hidden;
+                /*overflow-y:hidden;*/
+
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                margin: 0px;
             }
 
             .full-height {
@@ -63,16 +68,34 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
-            @media screen and (-webkit-min-device-pixel-ratio:0) {
-                  iframe{
-                      overflow: auto;
-                      -webkit-overflow-scrolling: touch;
-                  }
+          #contenedorframe {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+          }
+
+          #registro-frame {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: none;
+            margin-bottom: -10px;
+          }
+
+          @media screen and (-webkit-min-device-pixel-ratio:0) {
+            @media screen and (max-width:768px) {
+              #contenedorframe {
+                overflow: auto;
+            -webkit-overflow-scrolling: touch;
             }
+          }
+}
         </style>
     </head>
     <body>
-      <iframe src="http://catedra.grupoplenum.com" width="100%" height="100%" style="border:none;"></iframe>
+       <div id="contenedorframe">
+      <iframe src="http://catedra.grupoplenum.com"  id="registro-frame" width="100%" height="100%" style="border:none;"></iframe>
     <!-- <body> -->
         <!-- <div class="flex-center position-ref full-height"> -->
             <!-- @if (Route::has('login')) -->
@@ -96,4 +119,5 @@
             </div>
         </div> -->
     </body>
+  </div>
 </html>

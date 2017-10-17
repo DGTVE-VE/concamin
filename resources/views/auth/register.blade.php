@@ -869,7 +869,7 @@
 
   function validaUsuario(){
     var cadenaUsuario = document.getElementById("username").value;
-    if(cadenaUsuario.search(/[$=ñ*\s&!/?\\¿áéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜâêîôûÂÊÎÔÛ~}]/i)>=0){
+    if(cadenaUsuario.search(/[$=ñ*\s&!/?\\¿áéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜâêîôûÂÊÎÔÛ~]/i)>=0){
         document.getElementById("username").value = cadenaUsuario.replace(/[$=ñ*\s&!/?\\¿áéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜâêîôûÂÊÎÔÛ~]/gi,"");
         alert("En nombre de usuario: Evite el uso de ESPACIOS, Ñ, letras acentuadas y CARACTERES ESPECIALES ($ = * & ! / ¿ ? \\)");
         document.getElementById("username").focus();
